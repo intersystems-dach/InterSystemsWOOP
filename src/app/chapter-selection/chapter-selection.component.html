@@ -1,0 +1,21 @@
+<div class="container">
+  <div *ngFor="let chapter of chapters">
+    <div class="chapterContainer">
+    <div class="row">
+      <div>
+        <button
+          class="chapterButton"
+          (click)="onChapterSelected(chapter.Title)"
+        >
+          <i *ngIf="chapter.IsPrivate">{{ chapter.Title }}</i>
+          <div *ngIf="!chapter.IsPrivate">{{ chapter.Title }}</div>
+        </button>
+        <app-chapter-meta-data
+          [chapter]="chapter"
+          class="metaData"
+        ></app-chapter-meta-data>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

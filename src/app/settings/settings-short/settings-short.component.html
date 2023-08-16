@@ -1,0 +1,24 @@
+<div class="settings">
+  <button class="first" (click)="toggleDarkMode()">
+    {{ getDarkModeEnabled() ? "Lightmode" : "Darkmode" }}
+  </button>
+  <div class="dividedButton">
+    <button
+      class="smallButton"
+      (click)="decreaseFontSize()"
+      style="margin-left: 10px"
+    >
+      -
+    </button>
+    <p class="text">{{ "Font Size " + getFontSize() }}</p>
+    <button
+      class="smallButton"
+      (click)="increaseFontSize()"
+      style="margin-right: 10px"
+    >
+      +
+    </button>
+  </div>
+  <button (click)="goToAdvancedSettings()">Advanced</button>
+  <button (click)="hoToHelp()" class="last">Help</button>
+</div>

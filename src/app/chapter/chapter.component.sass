@@ -1,0 +1,51 @@
+.heading
+    text-align: center
+    color: var(--text-color)
+    .pageInput
+        background: none
+        color: var(--text-color)
+        border: none
+        width: 20px
+        margin: 0
+        -webkit-appearance: none
+        font-size: 15px
+        text-align: center
+        transition: 0.2s
+        &:focus
+            outline: none
+            width: 50px
+    input[type=number]
+        -moz-appearance: textfield
+
+.sticky
+    position: fixed
+    top: 0
+    width: 100%
+.content
+    margin-top: 100px
+.header
+    width: 100%
+    margin-top: 20px
+    display: flex
+    button
+        transition: 0.3s
+        cursor: pointer
+        border: none
+        font-size: 20px
+        background-color: var(--primary-color)
+        width: 100px
+        height: 40px
+        border-radius: 5px
+        color: var(--inverted-text-color)
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5)
+
+        &:hover
+            background-color: var(--secondary-color)
+            transform: scale(1.1)
+    .backButton
+        margin-left: 20px
+        margin-right: auto
+
+    .exportButton
+        margin-left: auto
+        margin-right: 20px

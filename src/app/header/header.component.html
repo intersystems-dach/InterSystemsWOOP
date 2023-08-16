@@ -1,0 +1,23 @@
+<div *ngIf="showSettings" class="background" (click)="toggleSettings()"></div>
+
+<header>
+  <button>
+    <img
+      class="logo"
+      src="assets/imgs/InterSystemsWOOPLogo.png"
+      alt="logo"
+      (click)="goBack()"
+    />
+  </button>
+  <img
+    [src]="
+      'assets/imgs/' +
+      (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+      '/settings.png'
+    "
+    class="settingsButton"
+    (click)="toggleSettings()"
+    alt="Settings"
+  />
+</header>
+<app-settings-short *ngIf="showSettings"></app-settings-short>

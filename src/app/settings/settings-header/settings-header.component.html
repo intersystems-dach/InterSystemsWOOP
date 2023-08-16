@@ -1,0 +1,14 @@
+<div class="header">
+  <button
+    [class]="selected == 'storage' ? 'selected' : ''"
+    (click)="setSelected('storage')"
+  >
+    Storage
+  </button>
+  <button
+    [class]="selected == 'about' ? 'selected' : ''"
+    (click)="setSelected('about')"
+  >
+    About
+  </button>
+</div>

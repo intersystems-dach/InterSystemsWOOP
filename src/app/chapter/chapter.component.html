@@ -1,0 +1,62 @@
+<app-header class="sticky"></app-header>
+<app-password-query
+  *ngIf="!contentVisible"
+  [chapterName]="chapter.Title"
+  (passwordEntered)="verifyChapter($event)"
+></app-password-query>
+<div *ngIf="contentVisible" class="content">
+  <div class="header">
+    <button (click)="goBack()" class="backButton">Back</button>
+    <!-- <button (click)="exportOptionsVisible = true" class="exportButton">
+      Export
+    </button> -->
+  </div>
+  <div class="heading">
+    <h1>{{ chapter.Title }}</h1>
+    <p>
+      <i>{{ chapter.Pages.length > 0 ? "Page " : "No Pages" }}</i>
+      <input
+        class="pageInput"
+        type="number"
+        [(ngModel)]="pageInput"
+        (ngModelChange)="onPageInput()"
+        *ngIf="chapter.Pages.length > 0"
+        [min]="1"
+        [max]="chapter.Pages.length"
+      />
+      <i *ngIf="chapter.Pages.length > 0">{{ "/ " + chapter.Pages.length }}</i>
+    </p>
+  </div>
+  <app-page
+    *ngFor="let p of chapter.Pages; let i = index"
+    [page]="p"
+    [show]="i == currentPage"
+    [showhint]="hintVisible"
+    [showResult]="resultVisible"
+  ></app-page>
+  <app-page-nav-bar
+    [showPrevButton]="currentPage != 0 && chapter.Pages.length > 0"
+    [showNextButton]="
+      currentPage != chapter.Pages.length - 1 && chapter.Pages.length > 0
+    "
+    [showResultButton]="
+      (chapter.Pages.length > 0
+        ? chapter.Pages[currentPage].Result != ''
+        : false) && !resultVisible
+    "
+    [showhintButton]="
+      (chapter.Pages.length > 0
+        ? chapter.Pages[currentPage].Hint != ''
+        : false) && !hintVisible
+    "
+    (showNextEmitter)="showNextPage()"
+    (showPrevEmitter)="showPrevPage()"
+    (showhintEmitter)="showhint()"
+    (showResultEmitter)="showResult()"
+  ></app-page-nav-bar>
+
+  <!-- <app-export-options
+    *ngIf="exportOptionsVisible"
+    (closeEmitter)="export($event)"
+  ></app-export-options> -->
+</div>

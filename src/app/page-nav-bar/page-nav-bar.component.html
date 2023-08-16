@@ -1,0 +1,32 @@
+<img
+  *ngIf="showNextButton"
+  class="nextButton navButton"
+  [src]="
+    'assets/imgs/' +
+    (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+    '/navigatePage.png'
+  "
+  alt="next"
+  (click)="showNext()"
+/>
+<img
+  *ngIf="showPrevButton"
+  class="prevButton navButton"
+  [src]="
+    'assets/imgs/' +
+    (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+    '/navigatePage.png'
+  "
+  alt="previous"
+  (click)="showPrev()"
+/>
+
+<div class="showButtons">
+  <button *ngIf="showhintButton" (click)="showhint()">Show hint</button>
+  <button *ngIf="showResultButton" (click)="showResult()">Show result</button>
+</div>
+
+<div class="showButtons mobile">
+  <button *ngIf="showPrevButton" (click)="showPrev()">Previous</button>
+  <button *ngIf="showNextButton" (click)="showNext()">Next</button>
+</div>

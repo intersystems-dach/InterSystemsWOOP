@@ -1,0 +1,10 @@
+<div class="container">
+  <p *ngIf="chapter.IsPrivate"><i>Private</i></p>
+  <p><i>Title</i>{{ ": " + chapter.Title }}</p>
+  <p><i>Author</i>{{ ": " + chapter.Author }}</p>
+  <p><i>Language</i>{{ ": " + chapter.Language }}</p>
+  <p><i>Pages</i>{{ ": " + chapter.Pages.length }}</p>
+  <p *ngIf="chapter.Description != ''">
+    <i>Description</i>{{ ": " + chapter.Description }}
+  </p>
+</div>
