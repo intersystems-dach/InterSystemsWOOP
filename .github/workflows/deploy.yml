@@ -29,5 +29,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/intersystems-woop
-      - name: Show URL
-        run: echo "https://$GITHUB_REPOSITORY.github.io/$GITHUB_REF_SLUG/"
