@@ -6,8 +6,7 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build Angular App
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,14 +23,11 @@ jobs:
 
       - name: Build Angular app
         run: npm run build
-  deploy:
-    needs: build
-    name: Deploy Angular App to GitHub Pages Branch
-    runs-on: ubuntu-latest
 
-    steps:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/intersystems-woop
+      - name: Show URL
+        run: echo "https://$GITHUB_REPOSITORY.github.io/$GITHUB_REF_SLUG/"
