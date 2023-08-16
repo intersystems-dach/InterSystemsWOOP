@@ -7,6 +7,7 @@ on:
 
 jobs:
   build:
+    name: Build Angular App
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +24,12 @@ jobs:
 
       - name: Build Angular app
         run: npm run build
+  deploy:
+    needs: build
+    name: Deploy Angular App to GitHub Pages Branch
+    runs-on: ubuntu-latest
 
+    steps:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
