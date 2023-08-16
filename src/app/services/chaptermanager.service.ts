@@ -63,7 +63,7 @@ export class ChaptermanagerService {
 
   getAllChapters(): Chapter[] {
     const chapter: any = {
-      Title: 'Welcome chapter',
+      Title: 'Welcome chapter test',
       Language: 'english',
       Author: 'test',
       Description:
