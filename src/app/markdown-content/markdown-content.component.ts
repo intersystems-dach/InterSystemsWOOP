@@ -54,7 +54,7 @@ export class MarkdownContentComponent {
           language: language,
           title: title,
         });
-      } else if (lines[i].startsWith('![')) {
+      } else if (lines[i].startsWith('![') || lines[i].startsWith('?[')) {
         //image
         let name = lines[i].split('[')[1].split(']')[0];
         let url = lines[i].split('(')[1].split(')')[0];
@@ -62,13 +62,8 @@ export class MarkdownContentComponent {
         if (lines[i].split(')')[1].includes('{')) {
           style = lines[i].split('{')[1].split('}')[0];
         }
-        if (url.toLowerCase().includes('woop/image/get')) {
-          let newURL = await this.http
-            .get(url, { responseType: 'text' })
-            .toPromise()
-            .then((res) => {
-              return res;
-            });
+        if (lines[i].startsWith('?[')) {
+          let newURL = 'assets/resources/' + name;
           if (newURL != undefined) {
             url = newURL;
           } else {
@@ -86,7 +81,8 @@ export class MarkdownContentComponent {
         while (
           i < lines.length &&
           !lines[i].startsWith('~~~') &&
-          !lines[i].startsWith('![')
+          !lines[i].startsWith('![') &&
+          !lines[i].startsWith('?[')
         ) {
           code += lines[i] + '\n';
           i++;

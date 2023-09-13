@@ -17,12 +17,10 @@ import { ChapterMetaDataComponent } from './chapter-meta-data/chapter-meta-data.
 import { AreYouSureComponent } from './user-input/are-you-sure/are-you-sure.component';
 import { FilterBarComponent } from './filter-bar/filter-bar.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
-import { MarkdownCheatSheetComponent } from './markdown-cheat-sheet/markdown-cheat-sheet.component';
 import { ExportOptionsComponent } from './user-input/export-options/export-options.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CodeWindowComponent } from './code-window/code-window.component';
-import { SharedModule } from './shared/shared.module';
 import { MarkdownDirective } from './markdown-content/markdown.directive';
 import { SettingsShortComponent } from './settings/settings-short/settings-short.component';
 import { SettingsAdvancedComponent } from './settings/settings-advanced/settings-advanced.component';
@@ -33,6 +31,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { GetHelpComponent } from './get-help/get-help.component';
 import { AboutSettingsComponent } from './settings/settings-pages/about-settings/about-settings.component';
 import { WhatsNewComponent } from './whats-new/whats-new.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +46,6 @@ import { WhatsNewComponent } from './whats-new/whats-new.component';
     AreYouSureComponent,
     FilterBarComponent,
     SearchBarComponent,
-    MarkdownCheatSheetComponent,
     ExportOptionsComponent,
     HomeComponent,
     CodeWindowComponent,
@@ -68,7 +66,6 @@ import { WhatsNewComponent } from './whats-new/whats-new.component';
     MarkdownModule.forRoot(),
     FormsModule,
     AppRoutingModule,
-    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
