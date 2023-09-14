@@ -23,7 +23,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
-            "assets": ["src/assets", "src/404.html"],
+            "assets": ["src/assets"],
             "styles": ["src/styles.sass"],
             "scripts": [],
             "baseHref": "/InterSystemsWOOPCli/"

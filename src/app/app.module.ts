@@ -32,6 +32,7 @@ import { GetHelpComponent } from './get-help/get-help.component';
 import { AboutSettingsComponent } from './settings/settings-pages/about-settings/about-settings.component';
 import { WhatsNewComponent } from './whats-new/whats-new.component';
 import { DeploymentInfoComponent } from './deployment-info/deployment-info.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,7 @@ import { DeploymentInfoComponent } from './deployment-info/deployment-info.compo
     FormsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
