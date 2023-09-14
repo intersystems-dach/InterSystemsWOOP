@@ -96,7 +96,7 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "ng build --configuration=production --base-href=/InterSystemsWOOPCli/"
         }
       }
     }
