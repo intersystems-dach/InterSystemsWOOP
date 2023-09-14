@@ -25,7 +25,8 @@
             "inlineStyleLanguage": "sass",
             "assets": ["src/assets"],
             "styles": ["src/styles.sass"],
-            "scripts": []
+            "scripts": [],
+            "baseHref": "/InterSystemsWOOP/"
           },
           "configurations": {
             "production": {
@@ -96,7 +97,7 @@
           }
         },
         "deploy": {
-          "builder": "ng build --configuration=production --base-href=/InterSystemsWOOPCli/"
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
