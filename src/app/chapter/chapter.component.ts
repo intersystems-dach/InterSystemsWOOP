@@ -39,20 +39,17 @@ export class ChapterComponent {
 
   ngOnInit(): void {
     let x = this.route.snapshot.paramMap.get('chapterName');
-    console.log(x);
     if (x == null) {
       this.router.navigate(['/']);
       return;
     }
 
     this.chapterName = x;
-    console.log(this.chapterName);
     this.chapterManger.init().then(() => {
       this.chapter = this.chapterManger.getChapterByName(
         this.chapterName,
         true
       );
-      console.log(this.chapter);
       this.contentVisible = VerifyCache.isChapterVerified(this.chapter.Title);
     });
     let pageLocalStorage = this.localStorageService.getPageForChapter(

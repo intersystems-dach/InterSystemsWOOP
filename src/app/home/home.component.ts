@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
 import { VersionService } from '../services/version.service';
+import { DeploymentKeyService } from '../services/deployment-key.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomeComponent {
   constructor(
     private router: Router,
     private chapterManager: ChaptermanagerService,
-    private versionService: VersionService
+    private versionService: VersionService,
+    private deploymentKeyService: DeploymentKeyService
   ) {}
 
   ngOnInit(): void {
@@ -44,5 +46,4 @@ export class HomeComponent {
   getChapters() {
     return this.chapterManager.chapters;
   }
-
 }

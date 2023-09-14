@@ -31,6 +31,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { GetHelpComponent } from './get-help/get-help.component';
 import { AboutSettingsComponent } from './settings/settings-pages/about-settings/about-settings.component';
 import { WhatsNewComponent } from './whats-new/whats-new.component';
+import { DeploymentInfoComponent } from './deployment-info/deployment-info.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { WhatsNewComponent } from './whats-new/whats-new.component';
     GetHelpComponent,
     AboutSettingsComponent,
     WhatsNewComponent,
+    DeploymentInfoComponent,
   ],
   imports: [
     BrowserModule,

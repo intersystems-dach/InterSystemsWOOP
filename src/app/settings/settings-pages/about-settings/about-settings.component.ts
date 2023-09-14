@@ -13,6 +13,9 @@ export class AboutSettingsComponent {
   getHelp() {
     this.router.navigate(['help']);
   }
+  goToDeploymentInfo() {
+    this.router.navigate(['deployment']);
+  }
 
   whatsNew() {
     this.router.navigate(['whats-new']);

@@ -21,17 +21,13 @@ export class PasswordQueryComponent {
 
   @Output() passwordEntered = new EventEmitter<boolean>();
 
-  constructor( private chaptermanagerService: ChaptermanagerService
-  ) {}
+  constructor(private chaptermanagerService: ChaptermanagerService) {}
 
   submit() {
-    console.log(
-      this.chaptermanagerService.getChapterByName(this.chapterName, false)
-        .Password
-    );
     if (
       this.enteredPassword ===
-      this.chaptermanagerService.getChapterByName(this.chapterName, false).Password
+      this.chaptermanagerService.getChapterByName(this.chapterName, false)
+        .Password
     ) {
       this.passwordEntered.emit(true);
       this.isWrong = false;

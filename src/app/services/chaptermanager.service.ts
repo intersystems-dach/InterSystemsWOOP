@@ -23,10 +23,7 @@ export class ChaptermanagerService {
     let json = await (await fetch('assets/chapters.json')).json();
     this.allChapters = this.getAllChapters(json);
 
-    console.log(this.allChapters);
-
     for (let chapter of this.allChapters) {
-      console.log(chapter.Password);
       if (chapter.Password === undefined) {
         chapter.Password = '';
       }
