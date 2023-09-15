@@ -1,4 +1,4 @@
-<app-header class="sticky"></app-header>
+<app-header class="sticky" [enableSearchBar]="false"></app-header>
 
 <div class="container">
   <button (click)="goBack()" class="backButton">Back</button>
@@ -6,6 +6,7 @@
     InterSystems Workshop Organizer and Optimizer Program
     <i>CHANGELOG</i>
   </h1>
+  <h2>Current version</h2>
   <p>
     Version: <i>{{ getMetaData().getVersion() }}</i>
   </p>

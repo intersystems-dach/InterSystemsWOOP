@@ -13,11 +13,23 @@
     [src]="
       'assets/imgs/' +
       (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
-      '/settings.png'
+      '/search.png'
     "
-    class="settingsButton"
-    (click)="toggleSettings()"
-    alt="Settings"
+    class="searchButton"
+    (click)="turnOnSearchBar()"
+    alt="Search"
+    *ngIf="enableSearchBar && !searchBarOn"
   />
+  <img
+  [src]="
+  'assets/imgs/' +
+  (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+  '/settings.png'
+  "
+  class="settingsButton"
+  (click)="toggleSettings()"
+  alt="Settings"
+  />
+  <app-search-bar-header *ngIf="enableSearchBar && searchBarOn" class="searchBar" (close)="turnOffSearchBar()" [chapter]="chapter"></app-search-bar-header>
 </header>
 <app-settings-short *ngIf="showSettings"></app-settings-short>

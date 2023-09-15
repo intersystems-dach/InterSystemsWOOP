@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Chapter } from 'src/utils/classes';
 import { ColorSchemeService } from '../services/color-scheme.service';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +12,17 @@ import { ColorSchemeService } from '../services/color-scheme.service';
 export class HeaderComponent {
   showSettings = false;
 
+  @Input() enableSearchBar: boolean = true;
+  @Input() chapter: Chapter | null = null;
+
+  searchBarOn = false;
+
   constructor(
     private router: Router,
     private colorSchemeService: ColorSchemeService,
+    private localStorageService: LocalStorageService
   ) {}
+
 
   goBack() {
     this.router.navigate(['/']);
@@ -25,5 +34,11 @@ export class HeaderComponent {
 
   getDarkModeEnabled() {
     return this.colorSchemeService.darkModeEnabled;
+  }
+  turnOnSearchBar() {
+    this.searchBarOn = true;
+  }
+  turnOffSearchBar() {
+    this.searchBarOn = false;
   }
 }
