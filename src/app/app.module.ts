@@ -33,6 +33,7 @@ import { AboutSettingsComponent } from './settings/settings-pages/about-settings
 import { WhatsNewComponent } from './whats-new/whats-new.component';
 import { DeploymentInfoComponent } from './deployment-info/deployment-info.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ImpressumComponent } from './impressum/impressum.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     AboutSettingsComponent,
     WhatsNewComponent,
     DeploymentInfoComponent,
+    ImpressumComponent,
   ],
   imports: [
     BrowserModule,

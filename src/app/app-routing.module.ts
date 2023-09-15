@@ -8,6 +8,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { GetHelpComponent } from './get-help/get-help.component';
 import { WhatsNewComponent } from './whats-new/whats-new.component';
 import { DeploymentInfoComponent } from './deployment-info/deployment-info.component';
+import { ImpressumComponent } from './impressum/impressum.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,8 @@ const routes: Routes = [
   { path: 'help', component: GetHelpComponent },
   { path: 'deployment', component: DeploymentInfoComponent },
   { path: 'whats-new', component: WhatsNewComponent },
+  { path: 'impressum', component: ImpressumComponent },
+  { path: '**', component: HomeComponent },
 ];
 
 @NgModule({
