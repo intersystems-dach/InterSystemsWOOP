@@ -20,7 +20,6 @@ const routes: Routes = [
   { path: 'deployment', component: DeploymentInfoComponent },
   { path: 'whats-new', component: WhatsNewComponent },
   { path: 'impressum', component: ImpressumComponent },
-  { path: '**', component: HomeComponent },
 ];
 
 @NgModule({
