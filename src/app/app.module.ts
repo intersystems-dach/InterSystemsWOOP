@@ -35,6 +35,7 @@ import { DeploymentInfoComponent } from './deployment-info/deployment-info.compo
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { SearchBarHeaderComponent } from './search-bar-header/search-bar-header.component';
+import { TableOfContentComponent } from './table-of-content/table-of-content.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { SearchBarHeaderComponent } from './search-bar-header/search-bar-header.
     DeploymentInfoComponent,
     ImpressumComponent,
     SearchBarHeaderComponent,
+    TableOfContentComponent,
   ],
   imports: [
     BrowserModule,

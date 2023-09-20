@@ -28,6 +28,7 @@ export class ChapterComponent {
   exportOptionsVisible = false;
   contentVisible = false;
   pageInput: number = 1;
+  showTOC: boolean = false;
 
   constructor(
     private mdService: MarkdownService,
@@ -123,6 +124,18 @@ export class ChapterComponent {
     this.resultVisible = true;
   }
 
+  setTOC(event: boolean) {
+    this.showTOC = event;
+  }
+
+  onTOCInput(event: number) {
+    if (event == -1) {
+      this.showTOC = false;
+      return;
+    }
+    this.currentPage = event;
+    this.pageInput = this.currentPage + 1;
+  }
   /* export(event: string) {
     this.exportOptionsVisible = !this.exportOptionsVisible;
     if (event == 'close') {
