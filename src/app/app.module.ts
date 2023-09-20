@@ -36,6 +36,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { SearchBarHeaderComponent } from './search-bar-header/search-bar-header.component';
 import { TableOfContentComponent } from './table-of-content/table-of-content.component';
+import { ChapterSearchComponent } from './chapter-search/chapter-search.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { TableOfContentComponent } from './table-of-content/table-of-content.com
     ImpressumComponent,
     SearchBarHeaderComponent,
     TableOfContentComponent,
+    ChapterSearchComponent,
   ],
   imports: [
     BrowserModule,

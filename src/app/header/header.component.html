@@ -30,6 +30,6 @@
   (click)="toggleSettings()"
   alt="Settings"
   />
-  <app-search-bar-header *ngIf="enableSearchBar && searchBarOn" class="searchBar" (close)="turnOffSearchBar()" [chapter]="chapter"></app-search-bar-header>
+  <app-search-bar-header *ngIf="enableSearchBar && searchBarOn" class="searchBar" (close)="turnOffSearchBar()" [chapter]="chapter" (pageChange)="pageChange.emit($event)"></app-search-bar-header>
 </header>
 <app-settings-short *ngIf="showSettings"></app-settings-short>
