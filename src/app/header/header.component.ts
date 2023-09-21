@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chapter } from 'src/utils/classes';
 import { ColorSchemeService } from '../services/color-scheme.service';
-import { LocalStorageService } from '../services/local-storage.service';
+import { MetaDataService } from '../services/meta-data.service';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +21,7 @@ export class HeaderComponent {
   constructor(
     private router: Router,
     private colorSchemeService: ColorSchemeService,
-    private localStorageService: LocalStorageService
+    private metaService: MetaDataService
   ) {}
 
   goBack() {
@@ -40,5 +40,9 @@ export class HeaderComponent {
   }
   turnOffSearchBar() {
     this.searchBarOn = false;
+  }
+
+  getMetaData() {
+    return this.metaService;
   }
 }

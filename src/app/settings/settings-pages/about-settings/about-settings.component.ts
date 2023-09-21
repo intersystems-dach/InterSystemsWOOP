@@ -30,4 +30,8 @@ export class AboutSettingsComponent {
   getVersion() {
     return this.metaDataService.getVersion();
   }
+
+  getInstanceName() {
+    return this.metaDataService.getInstanceName();
+  }
 }

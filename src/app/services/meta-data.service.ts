@@ -17,7 +17,16 @@ export class MetaDataService {
   getVersion(): string {
     return this.data.version;
   }
+
   getRealeseData(): string {
     return this.data.date;
+  }
+
+  getNotes(): string[] {
+    return this.data.notes.split(';');
+  }
+
+  getInstanceName(): string {
+    return this.data.instanceName;
   }
 }

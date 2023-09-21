@@ -16,4 +16,8 @@ export class WhatsNewComponent {
   getMetaData() {
     return this.metaDataService;
   }
+
+  getReleaseNotes() {
+    return this.metaDataService.getNotes();
+  }
 }

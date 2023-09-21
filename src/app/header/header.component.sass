@@ -84,20 +84,36 @@ header
     position: fixed
     top: 0
     width: 100%
+.logoButton
+  transition: 0.3s
+  &:hover
+    scale: 1.1
 .logo
     height: 45px
     margin-top: 16px
     margin-bottom: 16px
     margin-left: 50px
     transition: 0.3s
-    &:hover
-        scale: 1.1
+.instanceName
+  position: fixed
+  left: 118px
+  top: 45px
+  color: #28309d
+  font-size: 10px
+  font-weight: 600
+
 @media screen and (max-width: 600px)
+    .logoButton
+      &:hover
+        scale: 1
     .logo
       height: 30px
       margin-left: 10px
-      &:hover
-          scale: 1
+    .instanceName
+      left: 58px
+      top: 36px
+      font-size: 7px
+      font-weight: 600
     header
       .settingsButton
         right: 10px

@@ -1,13 +1,14 @@
 <div *ngIf="showSettings" class="background" (click)="toggleSettings()"></div>
 
 <header>
-  <button>
+  <button class="logoButton">
     <img
       class="logo"
       src="assets/imgs/InterSystemsWOOPLogo.png"
       alt="logo"
       (click)="goBack()"
     />
+    <div class="instanceName">{{getMetaData().getInstanceName()}}</div>
   </button>
   <img
     [src]="
