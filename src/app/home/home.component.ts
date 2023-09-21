@@ -35,7 +35,7 @@ export class HomeComponent {
     this.router.navigate(['/chapter', chapterName.replace(/\s/g, '-'), 'edit']);
   }
   goToWhatsNew() {
-    this.router.navigate(['/whats-new']);
+    this.router.navigate(['/info']);
   }
   getLatestVersion(): string {
     return this.metaDataService.getVersion();
