@@ -10,13 +10,15 @@ import { ColorSchemeService } from '../services/color-scheme.service';
 @Component({
   selector: 'app-page-nav-bar',
   templateUrl: './page-nav-bar.component.html',
-  styleUrls: ['./page-nav-bar.component.sass'],
+  styleUrls: ['./page-nav-bar.component.sass']
 })
 export class PageNavBarComponent {
   @Input() showNextButton: boolean = true;
   @Input() showPrevButton: boolean = true;
   @Input() showhintButton: boolean = true;
   @Input() showResultButton: boolean = true;
+
+  hintIsShown: boolean = false;
 
   @Output() showNextEmitter = new EventEmitter<string>();
   @Output() showPrevEmitter = new EventEmitter<string>();
@@ -28,13 +30,16 @@ export class PageNavBarComponent {
   @HostListener('document:keydown.control.arrowright', ['$event'])
   showNext() {
     this.showNextEmitter.emit('showNext');
+    this.hintIsShown = false;
   }
 
   @HostListener('document:keydown.control.arrowleft', ['$event'])
   showPrev() {
     this.showPrevEmitter.emit('showPrev');
+    this.hintIsShown = false;
   }
   showhint() {
+    this.hintIsShown = true;
     this.showhintEmitter.emit('showhint');
   }
   showResult() {

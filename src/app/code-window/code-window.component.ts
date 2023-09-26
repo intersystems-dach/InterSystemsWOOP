@@ -12,10 +12,12 @@ export class CodeWindowComponent {
 
   @Input() language: string = 'javascript';
   @Input() title: string = 'mycode';
+  @Input() copyable: boolean = false;
 
   @ViewChild('codeEle') codeEle!: ElementRef;
 
   copied: boolean = false;
+  db = false;
 
   constructor(private colorSchemeService: ColorSchemeService) {}
 
@@ -47,5 +49,9 @@ export class CodeWindowComponent {
     setTimeout(() => {
       this.copied = false;
     }, 1000);
+  }
+
+  onDblClick(){
+    this.db = !this.db;
   }
 }

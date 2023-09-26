@@ -23,7 +23,7 @@
 
 <div class="showButtons">
   <button *ngIf="showhintButton" (click)="showhint()">Show hint</button>
-  <button *ngIf="showResultButton" (click)="showResult()">Show result</button>
+  <button *ngIf="showResultButton && (!showhintButton || hintIsShown)" (click)="showResult()">Show result</button>
 </div>
 
 <div class="showButtons mobile">

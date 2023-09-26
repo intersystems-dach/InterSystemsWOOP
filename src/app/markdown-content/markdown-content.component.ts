@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { MarkdownService } from 'ngx-markdown';
-import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
@@ -17,7 +16,6 @@ export class MarkdownContentComponent {
 
   constructor(
     private mdService: MarkdownService,
-    private http: HttpClient,
     private localStorageService: LocalStorageService
   ) {}
 
@@ -40,14 +38,6 @@ export class MarkdownContentComponent {
           i++;
         }
         code = '\n' + code;
-        /* let codeblock =
-          '<app-code-window [code]="\'\\n' +
-          code +
-          '\'" language="' +
-          language +
-          '" title="' +
-          language +
-          '"></app-code-window>'; */
         this.blocks.push({
           type: 'codeblock',
           code: code,
