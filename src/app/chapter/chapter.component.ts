@@ -53,15 +53,18 @@ export class ChapterComponent {
           true
         );
         this.contentVisible = VerifyCache.isChapterVerified(this.chapter.Title);
+        let pageLocalStorage = this.localStorageService.getPageForChapter(
+          this.chapterName
+        );
+        if (pageLocalStorage < 0) {
+          pageLocalStorage = 0;
+        }
+        if (pageLocalStorage > this.chapter.Pages.length - 1) {
+          pageLocalStorage = this.chapter.Pages.length - 1;
+        }
+        this.currentPage = pageLocalStorage;
+        this.pageInput = this.currentPage + 1;
       });
-      let pageLocalStorage = this.localStorageService.getPageForChapter(
-        this.chapterName
-      );
-      if (pageLocalStorage > this.chapter.Pages.length - 1) {
-        pageLocalStorage = this.chapter.Pages.length - 1;
-      }
-      this.currentPage = pageLocalStorage;
-      this.pageInput = this.currentPage + 1;
     }, 100);
   }
 
