@@ -24,10 +24,8 @@ export class MarkdownContentComponent {
     let lines = this.data.split('\n');
 
     for (let i = 0; i < lines.length; i++) {
-
       // replace host and port
-      lines[i] = lines[i].replace('$$HOST$$', ServerManager.HOST);
-      lines[i] = lines[i].replace('$$PORT$$', ServerManager.PORT);
+      lines[i] = this.replaceHostAndPort(lines[i]);
 
       if (lines[i].startsWith('~~~')) {
         // code window
@@ -49,6 +47,8 @@ export class MarkdownContentComponent {
         let code = '';
         i++;
         while (!lines[i].startsWith('~~~') && i < lines.length) {
+          lines[i] = this.replaceHostAndPort(lines[i]);
+
           code += lines[i] + '\n';
           i++;
         }
@@ -110,6 +110,8 @@ export class MarkdownContentComponent {
             i++;
             continue;
           }
+          lines[i] = this.replaceHostAndPort(lines[i]);
+
           code += lines[i] + '\n';
           i++;
         }
@@ -123,6 +125,13 @@ export class MarkdownContentComponent {
       }
     }
   }
+
+  replaceHostAndPort(s: string): string {
+    s = s.replace(/\$\$HOST\$\$/g, ServerManager.HOST);
+    s = s.replace(/\$\$PORT\$\$/g, '' + ServerManager.PORT);
+    return s;
+  }
+
   async downloadFile(fileName: string) {
     let data = await fetch('assets/files/' + fileName).then((res) =>
       res.text()
