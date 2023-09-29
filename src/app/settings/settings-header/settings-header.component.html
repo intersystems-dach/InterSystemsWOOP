@@ -6,6 +6,12 @@
     Storage
   </button>
   <button
+    [class]="selected == 'server' ? 'selected' : ''"
+    (click)="setSelected('server')"
+  >
+    Server
+  </button>
+  <button
     [class]="selected == 'about' ? 'selected' : ''"
     (click)="setSelected('about')"
   >

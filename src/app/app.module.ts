@@ -37,6 +37,7 @@ import { ImpressumComponent } from './impressum/impressum.component';
 import { SearchBarHeaderComponent } from './search-bar-header/search-bar-header.component';
 import { TableOfContentComponent } from './table-of-content/table-of-content.component';
 import { ChapterSearchComponent } from './chapter-search/chapter-search.component';
+import { ServerSettingsComponent } from './settings/settings-pages/server-settings/server-settings.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ChapterSearchComponent } from './chapter-search/chapter-search.componen
     SearchBarHeaderComponent,
     TableOfContentComponent,
     ChapterSearchComponent,
+    ServerSettingsComponent,
   ],
   imports: [
     BrowserModule,

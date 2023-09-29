@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { VerifyCache } from 'src/utils/classes';
+import { ServerManager, VerifyCache } from 'src/utils/classes';
 import { ChaptermanagerService } from './chaptermanager.service';
 
 @Injectable({
@@ -32,6 +32,8 @@ export class LocalStorageService {
         }
       }
     });
+
+    ServerManager.load();
   }
 
   saveVerifyCache(cache: any[]) {

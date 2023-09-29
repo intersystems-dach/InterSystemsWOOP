@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MarkdownService } from 'ngx-markdown';
 import { LocalStorageService } from '../services/local-storage.service';
+import { ServerManager } from 'src/utils/classes';
 
 @Component({
   selector: 'app-markdown-content',
@@ -23,6 +24,11 @@ export class MarkdownContentComponent {
     let lines = this.data.split('\n');
 
     for (let i = 0; i < lines.length; i++) {
+
+      // replace host and port
+      lines[i] = lines[i].replace('$$HOST$$', ServerManager.HOST);
+      lines[i] = lines[i].replace('$$PORT$$', ServerManager.PORT);
+
       if (lines[i].startsWith('~~~')) {
         // code window
         let language = lines[i].replace('~~~', '');
@@ -88,6 +94,8 @@ export class MarkdownContentComponent {
         });
       } else {
         let code = '';
+        let inCodeBlock = false;
+
         while (
           i < lines.length &&
           !lines[i].startsWith('~~~') &&
@@ -95,6 +103,13 @@ export class MarkdownContentComponent {
           !lines[i].startsWith('$$$[') &&
           !lines[i].startsWith('?[')
         ) {
+          if (lines[i].startsWith('```')) {
+            inCodeBlock = !inCodeBlock;
+          }
+          if (!inCodeBlock && lines[i].startsWith('//')) {
+            i++;
+            continue;
+          }
           code += lines[i] + '\n';
           i++;
         }
@@ -109,18 +124,6 @@ export class MarkdownContentComponent {
     }
   }
   async downloadFile(fileName: string) {
-    /* this.irisinterfaceService.getFile(fileName).subscribe({
-      next: (res: any) => {
-        const link = document.createElement('a');
-        link.href =
-          'data:text/plain;charset=utf-8,' + encodeURIComponent(res.content);
-        link.download = res.name;
-        link.click();
-      },
-      error: (err) => {
-        alert('Error getting file:' + err.message);
-      },
-    }); */
     let data = await fetch('assets/files/' + fileName).then((res) =>
       res.text()
     );

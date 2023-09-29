@@ -89,14 +89,21 @@ export class VerifyCache {
   }
 }
 
-export class Version {
-  public version: string;
-  public date: string;
-  public changes: string[];
+export class ServerManager{
+  static HOST = 'localhost';
+  static PORT = '52773';
 
-  constructor(version: string, date: string, changes: string[]) {
-    this.version = version;
-    this.date = date;
-    this.changes = changes;
+  static save(){
+    localStorage.setItem('serverProps', JSON.stringify({host: this.HOST, port: this.PORT}));
+  }
+
+  static load(){
+    let props = localStorage.getItem('serverProps');
+    if(props == undefined){
+      return;
+    }
+    let obj = JSON.parse(props);
+    this.HOST = obj.host;
+    this.PORT = obj.port;
   }
 }

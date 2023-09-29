@@ -1,0 +1,35 @@
+{
+    "info": {
+        "title": "",
+        "description": "",
+        "version": "",
+        "x-ISC_Namespace": "TRAINING"
+    },
+    "basePath": "/api/training",
+    "paths": {
+        "/Customer/{id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "operationId": "GetCustomer",
+                "x-ISC_ServiceMethod": "GetCustomer",
+                "x-ISC_CORS": true,
+                "responses": {
+                    "default": {
+                        "description": "(Unexpected Error)"
+                    },
+                    "200": {
+                        "description": "(Expected Result)"
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0"
+}
