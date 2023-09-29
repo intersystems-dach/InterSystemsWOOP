@@ -26,7 +26,7 @@ export class ChapterComponent {
   hintVisible: boolean = false;
   resultVisible: boolean = false;
   exportOptionsVisible = false;
-  contentVisible = false;
+  contentVisible = true;
   pageInput: number = 1;
   showTOC: boolean = false;
 
@@ -46,18 +46,23 @@ export class ChapterComponent {
     }
 
     this.chapterName = x;
-    this.chapterManger.init().then(() => {
-      this.chapter = this.chapterManger.getChapterByName(
-        this.chapterName,
-        true
+    setTimeout(() => {
+      this.chapterManger.init().then(() => {
+        this.chapter = this.chapterManger.getChapterByName(
+          this.chapterName,
+          true
+        );
+        this.contentVisible = VerifyCache.isChapterVerified(this.chapter.Title);
+      });
+      let pageLocalStorage = this.localStorageService.getPageForChapter(
+        this.chapterName
       );
-      this.contentVisible = VerifyCache.isChapterVerified(this.chapter.Title);
-    });
-    let pageLocalStorage = this.localStorageService.getPageForChapter(
-      this.chapterName
-    );
-    this.currentPage = pageLocalStorage;
-    this.pageInput = this.currentPage + 1;
+      if (pageLocalStorage > this.chapter.Pages.length - 1) {
+        pageLocalStorage = this.chapter.Pages.length - 1;
+      }
+      this.currentPage = pageLocalStorage;
+      this.pageInput = this.currentPage + 1;
+    }, 100);
   }
 
   onPageInput() {
@@ -76,14 +81,13 @@ export class ChapterComponent {
     );
   }
 
-  verifyChapter(event: boolean) {
-    console.log(event);
-    if (event) {
-      VerifyCache.verifyChapter(this.chapter.Title);
-      this.contentVisible = true;
-    } else {
+  verifyChapter(event: string) {
+    if (event == undefined) {
       this.router.navigate(['/']);
+      return;
     }
+    VerifyCache.verifyChapter(this.chapter.Title, event);
+    this.contentVisible = true;
   }
 
   showNextPage(): void {
@@ -136,46 +140,6 @@ export class ChapterComponent {
     this.currentPage = event;
     this.pageInput = this.currentPage + 1;
   }
-  /* export(event: string) {
-    this.exportOptionsVisible = !this.exportOptionsVisible;
-    if (event == 'close') {
-      return;
-    }
-    let asPDf = event.includes('pdf');
-    let includehint = event.includes('hint');
-    let includeResult = event.includes('result');
-
-    let content = '# ' + this.chapter.Title + '\n---\n';
-    for (let page of this.chapter.Pages) {
-      content += page.Content + '\n---\n';
-      if (page.Hint != '' && includehint) {
-        content += '## HINT\n\n' + page.Hint + '\n---\n';
-      }
-      if (page.Result != '' && includeResult) {
-        content += '## RESULT\n\n' + page.Result + '\n---\n';
-      }
-      content += '\n\n';
-    }
-    if (asPDf) {
-
-      let html = this.mdService.parse(content);
-
-      let pdfContent = htmlToPdfmake(html);
-
-      const documentDefinition = { content: pdfContent };
-
-      pdfMake.createPdf(documentDefinition).open();
-    } else {
-      let blob = new Blob([content], { type: 'text/markdown' });
-      let url = URL.createObjectURL(blob);
-      let a = document.createElement('a');
-      a.href = url;
-      a.download = this.chapter.Title + '.md';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-  } */
 
   goBack() {
     this.router.navigate(['/']);

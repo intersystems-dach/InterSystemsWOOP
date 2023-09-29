@@ -17,7 +17,7 @@
       [code]="block.code"
       [language]="block.language"
       [title]="block.title"
-      [copyable]="false"
+      [copyable]="block.settings.includes('copy') || block.settings.includes('c')"
     ></app-code-window>
     <img
       *ngIf="block.type == 'image'"
@@ -25,5 +25,8 @@
       [alt]="block.title"
       [style]="block.language"
     />
+    <button *ngIf="block.type == 'file'" class="downloadButton" (click)="downloadFile(block.code)">
+      {{ block.title }}
+    </button>
   </div>
 </div>

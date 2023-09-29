@@ -15,18 +15,25 @@ export class MetaDataService {
   }
 
   getVersion(): string {
+    if(this.data == undefined) return "";
     return this.data.version;
   }
 
   getRealeseData(): string {
+    if (this.data == undefined) return '';
+
     return this.data.date;
   }
 
   getNotes(): string[] {
+    if (this.data == undefined) return [];
+
     return this.data.notes.split(';');
   }
 
   getInstanceName(): string {
+    if (this.data == undefined) return '';
+
     return this.data.instanceName;
   }
 }

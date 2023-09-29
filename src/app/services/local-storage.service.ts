@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { VerifyCache } from 'src/utils/classes';
+import { ChaptermanagerService } from './chaptermanager.service';
 
 @Injectable({
   providedIn: 'root',
@@ -7,16 +9,33 @@ import { Router } from '@angular/router';
 export class LocalStorageService {
   rememberPage: boolean = true;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private chaptermanagerService: ChaptermanagerService
+  ) {
     this.rememberPage = this.getRememberPage();
-    if (this.getStayLoggedIn()) {
-      const username = this.getUserName();
-      const password = this.getPassword();
-      if (username != null && password != null) {
-        this.router.navigate(['/login']);
-        this.setStayLoggedIn(true);
+
+    this.chaptermanagerService.init().then(() => {
+      let verifyCache: any = localStorage.getItem('verifyCache');
+      if (verifyCache == null) {
+        verifyCache = [];
+      } else {
+        verifyCache = JSON.parse(verifyCache);
       }
-    }
+      for (let entry of verifyCache) {
+        let chapter = this.chaptermanagerService.getChapterByName(
+          entry.name,
+          false
+        );
+        if (chapter != undefined && chapter.Password == entry.pwd) {
+          VerifyCache.verifyChapter(entry.name, entry.pwd, false);
+        }
+      }
+    });
+  }
+
+  saveVerifyCache(cache: any[]) {
+    localStorage.setItem('verifyCache', JSON.stringify(cache));
   }
 
   getRememberPage(): boolean {
@@ -67,105 +86,6 @@ export class LocalStorageService {
       return 0;
     }
     return parseInt(page);
-  }
-
-  getServerHost(): string {
-    let serverHost = localStorage.getItem('serverHost');
-    if (serverHost == null) {
-      return 'localhost';
-    }
-    return serverHost;
-  }
-
-
-  getServerPort(): number {
-    let serverPort = localStorage.getItem('serverPort');
-    if (serverPort == null) {
-      return 52773;
-    }
-    return parseInt(serverPort);
-  }
-
-  getUserName(): string | null {
-    return localStorage.getItem('userName');
-  }
-
-  setUserName(userName: string) {
-    localStorage.setItem('userName', userName);
-  }
-
-  setStayLoggedIn(stayLoggedIn: boolean) {
-    localStorage.setItem('stayLoggedIn', stayLoggedIn ? 'true' : 'false');
-  }
-
-  getStayLoggedIn(): boolean {
-    let stayLoggedIn = localStorage.getItem('stayLoggedIn');
-    if (stayLoggedIn == null) {
-      return false;
-    }
-    return stayLoggedIn == 'true';
-  }
-
-  removeUserName() {
-    localStorage.removeItem('userName');
-  }
-
-  getPassword(): string | null {
-    return localStorage.getItem('password');
-  }
-
-  setPassword(password: string) {
-    localStorage.setItem('password', password);
-  }
-
-  removePassword() {
-    localStorage.removeItem('password');
-  }
-
-  getAllServerConnections(): any[] {
-    let serverConnections = localStorage.getItem('serverConnections');
-    if (serverConnections == null) {
-      return [];
-    }
-    return JSON.parse(serverConnections);
-  }
-
-  getConnection(name: string) {
-    let serverConnections = this.getAllServerConnections();
-    for (let i = 0; i < serverConnections.length; i++) {
-      if (serverConnections[i].name == name) {
-        return serverConnections[i];
-      }
-    }
-    return null;
-  }
-
-  addServerConnection(name: string, host: string, port: number) {
-    let serverConnections = this.getAllServerConnections();
-    for (let i = 0; i < serverConnections.length; i++) {
-      if (serverConnections[i].name == name) {
-        serverConnections.splice(i, 1);
-      }
-    }
-    serverConnections.push({ name: name, host: host, port: port });
-    localStorage.setItem(
-      'serverConnections',
-      JSON.stringify(serverConnections)
-    );
-  }
-
-  removeServerConnection(name: string) {
-    let serverConnections = this.getAllServerConnections();
-    for (let i = 0; i < serverConnections.length; i++) {
-      if (serverConnections[i].name == name) {
-        serverConnections.splice(i, 1);
-        break;
-      }
-    }
-    localStorage.setItem(
-      'serverConnections',
-      JSON.stringify(serverConnections)
-    );
   }
 
   clearAll() {

@@ -6,9 +6,6 @@
 <div *ngIf="contentVisible" class="content">
   <div class="header">
     <button (click)="goBack()" class="backButton">Back</button>
-    <!-- <button (click)="exportOptionsVisible = true" class="exportButton">
-      Export
-    </button> -->
     <div class="tocButton" (click)="setTOC(true)">
       <div class="bar"></div>
       <div class="bar"></div>
@@ -59,10 +56,6 @@
     (showResultEmitter)="showResult()"
   ></app-page-nav-bar>
 
-  <!-- <app-export-options
-    *ngIf="exportOptionsVisible"
-    (closeEmitter)="export($event)"
-  ></app-export-options> -->
 </div>
 <app-table-of-content *ngIf="showTOC" (event)="onTOCInput($event)" [chapter]="chapter"></app-table-of-content>
 <app-header class="sticky" [chapter]="chapter" (pageChange)="onTOCInput($event - 1)"></app-header>

@@ -19,7 +19,7 @@ export class PasswordQueryComponent {
   type: string = 'password';
   @Input() chapterName: string = '';
 
-  @Output() passwordEntered = new EventEmitter<boolean>();
+  @Output() passwordEntered = new EventEmitter<string>();
 
   constructor(private chaptermanagerService: ChaptermanagerService) {}
 
@@ -29,7 +29,7 @@ export class PasswordQueryComponent {
       this.chaptermanagerService.getChapterByName(this.chapterName, false)
         .Password
     ) {
-      this.passwordEntered.emit(true);
+      this.passwordEntered.emit(this.enteredPassword);
       this.isWrong = false;
       this.enteredPassword = '';
     } else {
@@ -48,7 +48,7 @@ export class PasswordQueryComponent {
   }
   @HostListener('document:keydown.escape', ['$event'])
   close() {
-    this.passwordEntered.emit(false);
+    this.passwordEntered.emit(undefined);
     this.isWrong = false;
     this.enteredPassword = '';
   }

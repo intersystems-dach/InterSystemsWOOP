@@ -56,7 +56,7 @@ export class ChaptermanagerService {
       }
 
       if (chapter.Password === '') {
-        VerifyCache.verifyChapter(chapter.Title);
+        VerifyCache.verifyChapter(chapter.Title, "");
       }
     }
     this.allChapters = this.sortChaptersAlphabetically(this.allChapters);

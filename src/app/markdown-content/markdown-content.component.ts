@@ -26,6 +26,15 @@ export class MarkdownContentComponent {
       if (lines[i].startsWith('~~~')) {
         // code window
         let language = lines[i].replace('~~~', '');
+        let settings: string[] = [];
+        if (language.includes('{')) {
+          let settingString = language.split('{')[1];
+          language = language.split('{')[0];
+          if (settingString.includes('}')) {
+            settingString = settingString.split('}')[0];
+          }
+          settings = settingString.split(',');
+        }
         let title = language;
         if (language.toLowerCase() == 'objectscript') {
           language = 'javascript';
@@ -43,6 +52,7 @@ export class MarkdownContentComponent {
           code: code,
           language: language,
           title: title,
+          settings: settings,
         });
       } else if (lines[i].startsWith('![') || lines[i].startsWith('?[')) {
         //image
@@ -66,12 +76,23 @@ export class MarkdownContentComponent {
           language: style,
           title: name,
         });
+      } else if (lines[i].startsWith('$$$[')) {
+        //image
+        let name = lines[i].split('[')[1].split(']')[0];
+        let url = lines[i].split('(')[1].split(')')[0];
+        this.blocks.push({
+          type: 'file',
+          code: url,
+          language: '',
+          title: name,
+        });
       } else {
         let code = '';
         while (
           i < lines.length &&
           !lines[i].startsWith('~~~') &&
           !lines[i].startsWith('![') &&
+          !lines[i].startsWith('$$$[') &&
           !lines[i].startsWith('?[')
         ) {
           code += lines[i] + '\n';
@@ -86,54 +107,29 @@ export class MarkdownContentComponent {
         if (i != lines.length) i--;
       }
     }
-
-    /*
-```javascript
-let i = 0
-i++
-let z = 3
-z++
-```
-*/
-
-    // https://stackoverflow.com/questions/48879695/load-component-via-innerhtml-in-angular5
-
-    /* this.markdown = this.mdService.parse(x);
-    for (let codeblock of codeblocks) {
-      this.markdown += codeblock;
-    }
-    console.log(this.markdown); */
   }
-
-  /* private addComponent(template: any) {
-    @Component({ template })
-    class TemplateComponent {}
-
-    @NgModule({ declarations: [TemplateComponent] })
-    class TemplateModule {}
-
-    const mod = this.compiler.compileModuleAndAllComponentsSync(TemplateModule);
-    const factory = mod.componentFactories.find(
-      (comp) => comp.componentType === TemplateComponent
+  async downloadFile(fileName: string) {
+    /* this.irisinterfaceService.getFile(fileName).subscribe({
+      next: (res: any) => {
+        const link = document.createElement('a');
+        link.href =
+          'data:text/plain;charset=utf-8,' + encodeURIComponent(res.content);
+        link.download = res.name;
+        link.click();
+      },
+      error: (err) => {
+        alert('Error getting file:' + err.message);
+      },
+    }); */
+    let data = await fetch('assets/files/' + fileName).then((res) =>
+      res.text()
     );
-    if (!factory) {
-      throw new Error('No factory found');
-    }
-    const component = this.container.createComponent(factory);
-    Object.assign(component.instance);
-    // If properties are changed at a later stage, the change detection
-    // may need to be triggered manually:
-    // component.changeDetectorRef.detectChanges();
-  } */
 
-  /* loadComponent(language, code) {
-    const viewContainerRef = this.appMarkdown.viewContainerRef;
-    viewContainerRef.clear();
-
-    const componentRef =
-      viewContainerRef.createComponent<CodeWindowComponent>();
-    componentRef.instance.data = adItem.data;
-  } */
+    const link = document.createElement('a');
+    link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(data);
+    link.download = fileName;
+    link.click();
+  }
 
   getFontSize() {
     return this.localStorageService.getFontSize();
