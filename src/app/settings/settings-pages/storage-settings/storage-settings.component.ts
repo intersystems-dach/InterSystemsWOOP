@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 
 @Component({
   selector: 'app-storage-settings',
@@ -13,7 +14,10 @@ export class StorageSettingsComponent {
 
   clearStorage() {
     this.localStorageService.clearAll();
-    alert('Storage cleared!');
+    NotificationComponent.showNotification(
+      'Storage cleared',
+      'All data has been deleted.'
+    );
   }
 
   getRememberPage(): boolean {

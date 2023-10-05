@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <p class="label">WOOP Secret Settings</p>
+    <div></div>
+  </div>
+  <div class="row">
+    <p class="label">Verify all chapters</p>
+    <button class="action" (click)="verifyAllChapters()">Verify</button>
+  </div>
+  <div class="row">
+    <p class="label">View chapter.json</p>
+    <button class="action" (click)="viewChaptersJSON()">View</button>
+  </div>
+  <div class="row">
+    <p class="label">Additional Themes</p>
+    <div></div>
+  </div>
+  <div class="row">
+    <p class="label">Funky theme</p>
+    <button class="action" (click)="getColorSchemeService().funkyMode()">
+      Activate
+    </button>
+  </div>
+  <div class="row">
+    <p class="label">Ocean theme</p>
+    <button class="action" (click)="getColorSchemeService().oceanMode()">
+      Activate
+    </button>
+  </div>
+  <div class="row">
+    <p class="label">Sunset theme</p>
+    <button class="action" (click)="getColorSchemeService().sunsetMode()">
+      Activate
+    </button>
+  </div>
+  <div class="row">
+    <p class="label">Ruby theme</p>
+    <button class="action" (click)="getColorSchemeService().rubyMode()">
+      Activate
+    </button>
+  </div>
+  <div class="row">
+    <p class="label">Coral theme</p>
+    <button class="action" (click)="getColorSchemeService().coralMode()">
+      Activate
+    </button>
+  </div>
+  <div class="row">
+    <p class="label">Lavender theme</p>
+    <button class="action" (click)="getColorSchemeService().lavenderMode()">
+      Activate
+    </button>
+  </div>
+</div>

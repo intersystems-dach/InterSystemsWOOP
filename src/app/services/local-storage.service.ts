@@ -93,4 +93,13 @@ export class LocalStorageService {
   clearAll() {
     localStorage.clear();
   }
+
+  isWoopsActivated(): boolean {
+    let woopsActivated = localStorage.getItem('woopsActivated');
+    return woopsActivated == 'true';
+  }
+
+  setWoopsActivated(woopsActivated: boolean) {
+    localStorage.setItem('woopsActivated', woopsActivated ? 'true' : 'false');
+  }
 }

@@ -9,6 +9,8 @@ import { Chapter } from 'src/utils/classes';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
 import { ColorSchemeService } from '../services/color-scheme.service';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../services/local-storage.service';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-search-bar-header',
@@ -29,7 +31,8 @@ export class SearchBarHeaderComponent {
   constructor(
     private chapterManager: ChaptermanagerService,
     private colorSchemeService: ColorSchemeService,
-    private router: Router
+    private router: Router,
+    private localStorageService: LocalStorageService
   ) {
     router.events.forEach((event) => {
       this.closeSearchBar();
@@ -120,6 +123,25 @@ export class SearchBarHeaderComponent {
     }
     if (lowerSearchValue == 'funky') {
       this.colorSchemeService.funkyMode();
+    }
+    if (lowerSearchValue == 'ocean') {
+      this.colorSchemeService.oceanMode();
+    }
+    if (lowerSearchValue == 'sunset') {
+      this.colorSchemeService.sunsetMode();
+    }
+    if (lowerSearchValue == 'ruby') {
+      this.colorSchemeService.rubyMode();
+    }
+    if (lowerSearchValue == 'coral') {
+      this.colorSchemeService.coralMode();
+    }
+    if (lowerSearchValue == 'lavender') {
+      this.colorSchemeService.lavenderMode();
+    }
+    if (this.searchValue == 'WOOPSS') {
+      this.localStorageService.setWoopsActivated(true);
+      NotificationComponent.showNotification('WOOPSS', '');
     }
 
     let words = lowerSearchValue.split(' ');

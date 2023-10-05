@@ -81,23 +81,31 @@
     transform: translateY(0);
   }
 }
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(150%);
+  }
+  80% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 @keyframes slideOutFromTop {
   0% {
     transform: translateY(0);
+  }
+  20% {
+    transform: translateY(10%);
   }
   100% {
     transform: translateY(-200%);
   }
 }
 
-@keyframes slideIn {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
 @keyframes shake {
   0% {
     transform: translateX(0);

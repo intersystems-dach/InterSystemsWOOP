@@ -38,6 +38,8 @@ import { SearchBarHeaderComponent } from './search-bar-header/search-bar-header.
 import { TableOfContentComponent } from './table-of-content/table-of-content.component';
 import { ChapterSearchComponent } from './chapter-search/chapter-search.component';
 import { ServerSettingsComponent } from './settings/settings-pages/server-settings/server-settings.component';
+import { NotificationComponent } from './notification/notification.component';
+import { WoopsSettingsComponent } from './settings/settings-pages/woops-settings/woops-settings.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { ServerSettingsComponent } from './settings/settings-pages/server-settin
     TableOfContentComponent,
     ChapterSearchComponent,
     ServerSettingsComponent,
+    NotificationComponent,
+    WoopsSettingsComponent,
   ],
   imports: [
     BrowserModule,
