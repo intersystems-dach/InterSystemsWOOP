@@ -4,14 +4,12 @@ import { LocalStorageService } from '../../../services/local-storage.service';
 @Component({
   selector: 'app-storage-settings',
   templateUrl: './storage-settings.component.html',
-  styleUrls: ['./storage-settings.component.sass', '../stylesheet.sass'],
+  styleUrls: ['./storage-settings.component.scss', '../stylesheet.scss'],
 })
 export class StorageSettingsComponent {
   showSelectChapter = false;
 
-  constructor(
-    private localStorageService: LocalStorageService,
-  ) {}
+  constructor(private localStorageService: LocalStorageService) {}
 
   clearStorage() {
     this.localStorageService.clearAll();

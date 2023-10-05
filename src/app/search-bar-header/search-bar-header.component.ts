@@ -8,12 +8,12 @@ import {
 import { Chapter } from 'src/utils/classes';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
 import { ColorSchemeService } from '../services/color-scheme.service';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar-header',
   templateUrl: './search-bar-header.component.html',
-  styleUrls: ['./search-bar-header.component.sass'],
+  styleUrls: ['./search-bar-header.component.scss'],
 })
 export class SearchBarHeaderComponent {
   searchValue: string = '';
@@ -55,10 +55,8 @@ export class SearchBarHeaderComponent {
     }
   }
 
-
-searchChapter(): void {
-    if(this.chapter == null)
-    {
+  searchChapter(): void {
+    if (this.chapter == null) {
       return;
     }
     this.searchChapterResult = [];
@@ -90,7 +88,7 @@ searchChapter(): void {
         spaceCount = 0;
         while (end < text.length && spaceCount < 2) {
           end++;
-          if(text[end] == ' ') {
+          if (text[end] == ' ') {
             spaceCount++;
           }
         }

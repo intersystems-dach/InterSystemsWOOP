@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-settings-header',
   templateUrl: './settings-header.component.html',
-  styleUrls: ['./settings-header.component.sass'],
+  styleUrls: ['./settings-header.component.scss'],
 })
 export class SettingsHeaderComponent {
   @Input() selected: string = 'storage';

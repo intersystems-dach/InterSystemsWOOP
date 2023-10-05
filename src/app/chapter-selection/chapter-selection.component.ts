@@ -10,7 +10,7 @@ import { ColorSchemeService } from '../services/color-scheme.service';
 @Component({
   selector: 'app-chapter-selection',
   templateUrl: './chapter-selection.component.html',
-  styleUrls: ['./chapter-selection.component.sass'],
+  styleUrls: ['./chapter-selection.component.scss'],
 })
 export class ChapterSelectionComponent {
   @Input() chapters: Chapter[] = [];

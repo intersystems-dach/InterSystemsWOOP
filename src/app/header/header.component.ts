@@ -7,7 +7,7 @@ import { MetaDataService } from '../services/meta-data.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.sass'],
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
   showSettings = false;

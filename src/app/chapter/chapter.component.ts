@@ -16,7 +16,7 @@ import htmlToPdfmake from 'html-to-pdfmake'; */
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',
-  styleUrls: ['./chapter.component.sass'],
+  styleUrls: ['./chapter.component.scss'],
 })
 export class ChapterComponent {
   @Input() chapter!: Chapter;

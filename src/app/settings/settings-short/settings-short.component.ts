@@ -6,7 +6,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 @Component({
   selector: 'app-settings-short',
   templateUrl: './settings-short.component.html',
-  styleUrls: ['./settings-short.component.sass'],
+  styleUrls: ['./settings-short.component.scss'],
 })
 export class SettingsShortComponent {
   logIn: boolean = false;

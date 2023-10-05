@@ -4,7 +4,7 @@ import { DeploymentKeyService } from '../services/deployment-key.service';
 @Component({
   selector: 'app-deployment-info',
   templateUrl: './deployment-info.component.html',
-  styleUrls: ['./deployment-info.component.sass'],
+  styleUrls: ['./deployment-info.component.scss'],
 })
 export class DeploymentInfoComponent {
   constructor(private deploymentKeyService: DeploymentKeyService) {}

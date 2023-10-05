@@ -5,7 +5,7 @@ import { MetaDataService } from 'src/app/services/meta-data.service';
 @Component({
   selector: 'app-about-settings',
   templateUrl: './about-settings.component.html',
-  styleUrls: ['./about-settings.component.sass', '../stylesheet.sass'],
+  styleUrls: ['./about-settings.component.scss', '../stylesheet.scss'],
 })
 export class AboutSettingsComponent {
   constructor(

@@ -5,7 +5,7 @@ import { ServerManager } from 'src/utils/classes';
 @Component({
   selector: 'app-server-settings',
   templateUrl: './server-settings.component.html',
-  styleUrls: ['./server-settings.component.sass', '../stylesheet.sass'],
+  styleUrls: ['./server-settings.component.scss', '../stylesheet.scss'],
 })
 export class ServerSettingsComponent {
   host: string = 'localhost';
@@ -22,5 +22,4 @@ export class ServerSettingsComponent {
     ServerManager.PORT = this.port;
     ServerManager.save();
   }
-
 }
