@@ -4,15 +4,7 @@ import { MarkdownService } from 'ngx-markdown';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
 import { LocalStorageService } from '../services/local-storage.service';
-/* const { mdToPdf } = require('md-to-pdf'); */
 
-/* import pdfMake from 'pdfmake/build/pdfmake';
-
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-import htmlToPdfmake from 'html-to-pdfmake'; */
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',
@@ -21,7 +13,7 @@ import htmlToPdfmake from 'html-to-pdfmake'; */
 export class ChapterComponent {
   @Input() chapter!: Chapter;
   @Input() currentPage: number = 0;
-  // test
+
   chapterName: string = '';
   hintVisible: boolean = false;
   resultVisible: boolean = false;
@@ -48,6 +40,11 @@ export class ChapterComponent {
     this.chapterName = x;
     setTimeout(() => {
       this.chapterManger.init().then(() => {
+        let heading = undefined;
+        if (this.chapterName.includes('~')) {
+          heading = this.chapterName.split('~')[1].toLowerCase();
+          this.chapterName = this.chapterName.split('~')[0];
+        }
         this.chapter = this.chapterManger.getChapterByName(
           this.chapterName,
           true
@@ -64,6 +61,13 @@ export class ChapterComponent {
         }
         this.currentPage = pageLocalStorage;
         this.pageInput = this.currentPage + 1;
+        if (heading != undefined) {
+          let headingPage = this.chapter.getPageForHeading(heading);
+          if (headingPage != -1) {
+            this.currentPage = headingPage;
+            this.pageInput = this.currentPage + 1;
+          }
+        }
       });
     }, 100);
   }

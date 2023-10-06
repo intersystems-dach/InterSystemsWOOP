@@ -43,6 +43,26 @@ export class Chapter {
       this.Description = '';
     }
   }
+
+  getPageForHeading(heading: string, trim = true): number {
+    if (trim) {
+      heading = heading.toLowerCase().replace(/\s/g, '-');
+    }
+    for (let i = 0; i < this.Pages.length; i++) {
+      let page = this.Pages[i];
+      for (let line of page.Content.split('\n')) {
+        if (line.startsWith('#')) {
+          if (trim) {
+            line = line.toLowerCase().replace(/\s/g, '-');
+          }
+          if (line.includes(heading)) {
+            return i;
+          }
+        }
+      }
+    }
+    return -1;
+  }
 }
 
 export class Page {
@@ -69,37 +89,40 @@ export class VerifyCache {
   }
 
   static verifyChapter(chapterName: string, password: string, save = true) {
-    for(let x of this.verifyCache){
-      if(x.name == chapterName){
+    for (let x of this.verifyCache) {
+      if (x.name == chapterName) {
         x.pwd = password;
         return;
       }
     }
-    this.verifyCache.push({name: chapterName, pwd: password});
-    if(password == ""){
+    this.verifyCache.push({ name: chapterName, pwd: password });
+    if (password == '') {
       return;
     }
-    if(save){
+    if (save) {
       localStorage.setItem('verifyCache', JSON.stringify(this.verifyCache));
     }
   }
 
-  static setCache(cache: any[]){
+  static setCache(cache: any[]) {
     this.verifyCache = cache;
   }
 }
 
-export class ServerManager{
+export class ServerManager {
   static HOST = 'localhost';
   static PORT = '52773';
 
-  static save(){
-    localStorage.setItem('serverProps', JSON.stringify({host: this.HOST, port: this.PORT}));
+  static save() {
+    localStorage.setItem(
+      'serverProps',
+      JSON.stringify({ host: this.HOST, port: this.PORT })
+    );
   }
 
-  static load(){
+  static load() {
     let props = localStorage.getItem('serverProps');
-    if(props == undefined){
+    if (props == undefined) {
       return;
     }
     let obj = JSON.parse(props);
