@@ -21,7 +21,7 @@ import htmlToPdfmake from 'html-to-pdfmake'; */
 export class ChapterComponent {
   @Input() chapter!: Chapter;
   @Input() currentPage: number = 0;
-
+  // test
   chapterName: string = '';
   hintVisible: boolean = false;
   resultVisible: boolean = false;
