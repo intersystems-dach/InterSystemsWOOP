@@ -19,6 +19,6 @@
     *ngIf="selected.toLowerCase() == 'about'"
   ></app-about-settings>
   <app-woops-settings
-    *ngIf="selected.toLowerCase() == 'woopss'"
+    *ngIf="selected.toLowerCase() == 'woopss' && isWoopssEnabled()"
   ></app-woops-settings>
 </div>

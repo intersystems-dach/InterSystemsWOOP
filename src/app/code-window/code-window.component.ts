@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import * as Prism from 'prismjs';
 import { ColorSchemeService } from '../services/color-scheme.service';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-code-window',
@@ -38,6 +39,13 @@ export class CodeWindowComponent {
     return this.colorSchemeService.darkModeEnabled;
   }
 
+  toggleCopyable() {
+    if (!LocalStorageService.isWoopsActivated()) {
+      return;
+    }
+    this.copyable = !this.copyable;
+  }
+
   copyCode() {
     const el = document.createElement('textarea');
     el.value = this.code;
@@ -51,7 +59,7 @@ export class CodeWindowComponent {
     }, 1000);
   }
 
-  onDblClick(){
+  onDblClick() {
     this.db = !this.db;
   }
 }

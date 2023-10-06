@@ -16,9 +16,14 @@ export class WoopsSettingsComponent {
   ) {}
 
   verifyAllChapters() {
+    localStorage.removeItem('verifyCache');
     this.chapterManager.allChapters.forEach((chapter) => {
       VerifyCache.verifyChapter(chapter.Title, chapter.Password, true);
     });
+    NotificationComponent.showNotification(
+      'Verification',
+      'All chapters have been verified'
+    );
   }
 
   getColorSchemeService(): ColorSchemeService {

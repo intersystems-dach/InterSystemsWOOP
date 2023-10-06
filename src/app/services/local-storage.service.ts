@@ -94,12 +94,12 @@ export class LocalStorageService {
     localStorage.clear();
   }
 
-  isWoopsActivated(): boolean {
+  static isWoopsActivated(): boolean {
     let woopsActivated = localStorage.getItem('woopsActivated');
     return woopsActivated == 'true';
   }
 
-  setWoopsActivated(woopsActivated: boolean) {
+  static setWoopsActivated(woopsActivated: boolean) {
     localStorage.setItem('woopsActivated', woopsActivated ? 'true' : 'false');
   }
 }

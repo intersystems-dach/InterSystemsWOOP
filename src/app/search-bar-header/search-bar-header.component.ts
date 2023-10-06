@@ -31,8 +31,7 @@ export class SearchBarHeaderComponent {
   constructor(
     private chapterManager: ChaptermanagerService,
     private colorSchemeService: ColorSchemeService,
-    private router: Router,
-    private localStorageService: LocalStorageService
+    private router: Router
   ) {
     router.events.forEach((event) => {
       this.closeSearchBar();
@@ -75,9 +74,16 @@ export class SearchBarHeaderComponent {
       if (page == null) {
         continue;
       }
-      if (page.Content.toLowerCase().includes(lowerSearchValue)) {
+      let arr = [page.Content];
+      if (LocalStorageService.isWoopsActivated()) {
+        arr.push(page.Hint);
+        arr.push(page.Result);
+      }
+      for (let text of arr) {
+        if (!text.toLowerCase().includes(lowerSearchValue)) {
+          continue;
+        }
         // get one word before and after
-        let text = page.Content;
         let index = text.toLowerCase().indexOf(lowerSearchValue);
         let start = index;
         let spaceCount = 0;
@@ -121,6 +127,10 @@ export class SearchBarHeaderComponent {
     if (lowerSearchValue == 'pbonin') {
       window.location.href = 'https://philipp-bonin.com/';
     }
+    if (lowerSearchValue == 'pong') {
+      window.location.href =
+        'https://intersystems-dach.github.io/InterSystemsPong/';
+    }
     if (lowerSearchValue == 'funky') {
       this.colorSchemeService.funkyMode();
     }
@@ -140,7 +150,7 @@ export class SearchBarHeaderComponent {
       this.colorSchemeService.lavenderMode();
     }
     if (this.searchValue == 'WOOPSS') {
-      this.localStorageService.setWoopsActivated(true);
+      LocalStorageService.setWoopsActivated(true);
       NotificationComponent.showNotification('WOOPSS', '');
     }
 

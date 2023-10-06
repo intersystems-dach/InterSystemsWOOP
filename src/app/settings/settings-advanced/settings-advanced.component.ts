@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-settings-advanced',
@@ -26,5 +27,9 @@ export class SettingsAdvancedComponent {
 
   goBack() {
     this.router.navigate(['/']);
+  }
+
+  isWoopssEnabled() {
+    return LocalStorageService.isWoopsActivated();
   }
 }

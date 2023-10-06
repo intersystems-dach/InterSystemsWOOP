@@ -10,10 +10,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 export class SettingsHeaderComponent {
   @Input() selected: string = 'storage';
   @Output() selectedChange = new EventEmitter<string>();
-  constructor(
-    private router: Router,
-    private localStorageService: LocalStorageService
-  ) {}
+  constructor(private router: Router) {}
 
   setSelected(selected: string) {
     this.selected = selected;
@@ -22,6 +19,6 @@ export class SettingsHeaderComponent {
   }
 
   isWoopsActive(): boolean {
-    return this.localStorageService.isWoopsActivated();
+    return LocalStorageService.isWoopsActivated();
   }
 }
