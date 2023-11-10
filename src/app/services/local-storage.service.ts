@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServerManager, VerifyCache } from 'src/utils/classes';
 import { ChaptermanagerService } from './chaptermanager.service';
+import { CookieMessageComponent } from '../cookie-message/cookie-message.component';
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +10,17 @@ import { ChaptermanagerService } from './chaptermanager.service';
 export class LocalStorageService {
   rememberPage: boolean = true;
 
+  static cookiesAccepted: boolean = false;
+
   constructor(
     private router: Router,
     private chaptermanagerService: ChaptermanagerService
   ) {
+    LocalStorageService.cookiesAccepted = this.getCookiesAccepted();
+    if (!LocalStorageService.cookiesAccepted) {
+      CookieMessageComponent.show();
+    }
+
     this.rememberPage = this.getRememberPage();
 
     this.chaptermanagerService.init().then(() => {
@@ -37,7 +45,7 @@ export class LocalStorageService {
   }
 
   saveVerifyCache(cache: any[]) {
-    localStorage.setItem('verifyCache', JSON.stringify(cache));
+    LocalStorageService.setLS('verifyCache', JSON.stringify(cache));
   }
 
   getRememberPage(): boolean {
@@ -48,13 +56,21 @@ export class LocalStorageService {
     return rememberPage == 'true';
   }
 
+  getCookiesAccepted(): boolean {
+    let rememberPage = localStorage.getItem('WOOPCookiesAccepted');
+    if (rememberPage == null) {
+      return false;
+    }
+    return rememberPage == 'true';
+  }
+
   setRememberPage(rememberPage: boolean) {
-    localStorage.setItem('rememberPage', rememberPage ? 'true' : 'false');
+    LocalStorageService.setLS('rememberPage', rememberPage ? 'true' : 'false');
     this.rememberPage = rememberPage;
   }
 
   setColorScheme(darkMode: boolean) {
-    localStorage.setItem('colorScheme', darkMode ? 'dark' : 'light');
+    LocalStorageService.setLS('colorScheme', darkMode ? 'dark' : 'light');
   }
 
   getColorScheme(): string | null {
@@ -63,7 +79,7 @@ export class LocalStorageService {
   }
 
   setFontSize(fontSize: number) {
-    localStorage.setItem('fontSize', fontSize.toString());
+    LocalStorageService.setLS('fontSize', fontSize.toString());
   }
 
   getFontSize(): number {
@@ -75,7 +91,7 @@ export class LocalStorageService {
   }
 
   setPageForChapter(chapterTitle: string, page: number) {
-    localStorage.setItem(chapterTitle, page.toString());
+    LocalStorageService.setLS(chapterTitle, page.toString());
   }
 
   getPageForChapter(chapterTitle: string): number {
@@ -100,6 +116,26 @@ export class LocalStorageService {
   }
 
   static setWoopsActivated(woopsActivated: boolean) {
-    localStorage.setItem('woopsActivated', woopsActivated ? 'true' : 'false');
+    LocalStorageService.setLS(
+      'woopsActivated',
+      woopsActivated ? 'true' : 'false'
+    );
+  }
+
+  static setLS(key: string, value: string) {
+    if (!this.cookiesAccepted) {
+      return;
+    }
+    localStorage.setItem(key, value);
+  }
+
+  static acceptCookies() {
+    LocalStorageService.cookiesAccepted = true;
+    LocalStorageService.setLS('WOOPCookiesAccepted', 'true');
+  }
+
+  static rejectCookies() {
+    LocalStorageService.cookiesAccepted = false;
+    localStorage.clear();
   }
 }

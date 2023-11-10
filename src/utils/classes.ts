@@ -1,3 +1,5 @@
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+
 export class Chapter {
   public Title: string;
   public Pages: Page[];
@@ -100,7 +102,10 @@ export class VerifyCache {
       return;
     }
     if (save) {
-      localStorage.setItem('verifyCache', JSON.stringify(this.verifyCache));
+      LocalStorageService.setLS(
+        'verifyCache',
+        JSON.stringify(this.verifyCache)
+      );
     }
   }
 
@@ -114,7 +119,7 @@ export class ServerManager {
   static PORT = '52773';
 
   static save() {
-    localStorage.setItem(
+    LocalStorageService.setLS(
       'serverProps',
       JSON.stringify({ host: this.HOST, port: this.PORT })
     );

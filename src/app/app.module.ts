@@ -40,6 +40,7 @@ import { ChapterSearchComponent } from './chapter-search/chapter-search.componen
 import { ServerSettingsComponent } from './settings/settings-pages/server-settings/server-settings.component';
 import { NotificationComponent } from './notification/notification.component';
 import { WoopsSettingsComponent } from './settings/settings-pages/woops-settings/woops-settings.component';
+import { CookieMessageComponent } from './cookie-message/cookie-message.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { WoopsSettingsComponent } from './settings/settings-pages/woops-settings
     ServerSettingsComponent,
     NotificationComponent,
     WoopsSettingsComponent,
+    CookieMessageComponent,
   ],
   imports: [
     BrowserModule,
