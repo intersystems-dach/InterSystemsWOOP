@@ -1,5 +1,11 @@
 <div class="container">
   <div class="row">
+    <p class="label">Cookies</p>
+    <button class="action" (click)="toggleCookiesAccepted()">
+      {{ coookiesAccepted() ? "Reject" : "Accept" }}
+    </button>
+  </div>
+  <div class="row">
     <p class="label">
       {{ "Remember Page: " + (getRememberPage() ? "ON" : "OFF") }}
     </p>
@@ -12,4 +18,3 @@
     <button class="red action" (click)="clearStorage()">Clear</button>
   </div>
 </div>
-

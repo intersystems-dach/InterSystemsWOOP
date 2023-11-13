@@ -29,4 +29,24 @@ export class StorageSettingsComponent {
       !this.localStorageService.rememberPage
     );
   }
+
+  coookiesAccepted(): boolean {
+    return LocalStorageService.cookiesAccepted;
+  }
+
+  toggleCookiesAccepted() {
+    if (LocalStorageService.cookiesAccepted) {
+      LocalStorageService.rejectCookies();
+      NotificationComponent.showNotification(
+        'Cookies rejected',
+        'Cookies will not be used.'
+      );
+      return;
+    }
+    LocalStorageService.acceptCookies();
+    NotificationComponent.showNotification(
+      'Cookies accepted',
+      'Cookies will be used.'
+    );
+  }
 }
