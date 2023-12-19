@@ -45,3 +45,6 @@ ideas.md
 /.vscode
 git-github-token.sh
 PUSHTOGIT.bat
+
+
+pushAll.sh
