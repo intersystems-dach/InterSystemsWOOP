@@ -20,7 +20,12 @@ export class ChaptermanagerService {
   async init() {
     if (this.initDone) return;
 
-    let json = await (await fetch('assets/chapters.json')).json();
+    let raw = await await (await fetch('assets/chapters')).text();
+    // raw is encoded in base64 decode it
+    console.log(raw);
+    raw = atob(raw);
+    raw = decodeURIComponent(escape(raw));
+    let json = JSON.parse(raw);
     this.allChapters = this.getAllChapters(json);
 
     for (let chapter of this.allChapters) {
@@ -56,7 +61,7 @@ export class ChaptermanagerService {
       }
 
       if (chapter.Password === '') {
-        VerifyCache.verifyChapter(chapter.Title, "");
+        VerifyCache.verifyChapter(chapter.Title, '');
       }
     }
     this.allChapters = this.sortChaptersAlphabetically(this.allChapters);
