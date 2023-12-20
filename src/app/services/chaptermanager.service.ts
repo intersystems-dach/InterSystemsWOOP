@@ -20,9 +20,7 @@ export class ChaptermanagerService {
   async init() {
     if (this.initDone) return;
 
-    let raw = await await (await fetch('assets/chapters')).text();
-    // raw is encoded in base64 decode it
-    console.log(raw);
+    let raw = await (await fetch('assets/chapters')).text();
     raw = atob(raw);
     raw = decodeURIComponent(escape(raw));
     let json = JSON.parse(raw);

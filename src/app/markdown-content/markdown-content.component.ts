@@ -147,6 +147,8 @@ export class MarkdownContentComponent {
     let data = await fetch('assets/files/' + fileName).then((res) =>
       res.text()
     );
+    data = atob(data);
+    data = decodeURIComponent(escape(data));
 
     const link = document.createElement('a');
     link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(data);

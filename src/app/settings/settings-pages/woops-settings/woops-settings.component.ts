@@ -31,9 +31,11 @@ export class WoopsSettingsComponent {
   }
 
   viewChaptersJSON() {
-    fetch('assets/chapters.json').then((response) => {
-      response.json().then((json) => {
-        //alert(JSON.stringify(json, null, 4));
+    fetch('assets/chapters').then((response) => {
+      response.text().then((raw) => {
+        raw = atob(raw);
+        raw = decodeURIComponent(escape(raw));
+        let json = JSON.parse(raw);
         console.log(json);
         NotificationComponent.showNotification(
           'Chapters JSON',
