@@ -1,132 +1,59 @@
-Class Training.Article Extends (%Persistent, %XML.Adaptor, %JSON.Adaptor, %Populate)
-{
-
-Property EAN As %String(MAXLEN = 13, MINLEN = 13, POPSPEC = ".CreateEAN()");
-
-Property ArticleDescription As %String(POPORDER = 3, POPSPEC = ".CreateArticleDescription()");
-
-Property Presentation As %String(MAXLEN = 3, POPORDER = 4, POPSPEC = ".GetPresentation()");
-
-Property Quantity As %Integer(POPORDER = 5, POPSPEC = ".GetQuantity()");
-
-Property QuantityUnit As %String(POPORDER = 6, POPSPEC = ".GetUnit()");
-
-Property BasePrice As %Numeric(MAXVAL = 20.00, MINVAL = 2.00, POPORDER = 1);
-
-Property MarketPrice As %Numeric(POPORDER = 2, POPSPEC = ".GetMarketPrice()");
-
-Property PlaceOfStorage As list Of %String(POPSPEC = ".GetPlaceOfStorage():3");
-
-Index idxBezDar On (ArticleDescription, Quantity) [ Unique ];
-
-Method AddRemovePlaceOfStorage(pPlaceOfStorage As %String(MAXLEN=1), pDelete As %Boolean) As %Status
-{
-
-    #dim tSc as %Status = $$$OK
-
-        Try {
-            Set tIdx = ..PlaceOfStorage.Find(pPlaceOfStorage)
-            If 'pDelete && (tIdx="") {
-                $$$ThrowOnError(..PlaceOfStorage.Insert(pPlaceOfStorage))
-            }
-            ElseIf pDelete && (tIdx'="") {
-                Do ..PlaceOfStorage.RemoveAt(tIdx)    
-            }
-        }
-        Catch tEx {
-            Write !,tEx.DisplayString()
-            Set tSc = tEx.AsStatus() 
-        } 
-
-        Return tSc
-}
-
-Method CreateArticleDescription() As %String [ Private ]
-{
-
-    Set tValues = "ABC-Pflaster,Aspirin,Thomapyrin,Ibuprophen,Muccosolvan,Voltaren"
-    Set tIdx = $R($L(tValues,",")) + 1
-    Return $P(tValues,",",tIdx)
-}
-
-Method GetPresentation() As %String [ Private ]
-{
-
-    Return $CASE(i%ArticleDescription,
-                "ABC-Pflaster" :"PFL",
-                "Muccosolvan" : "TRO",
-                : "TAB"
-
-    )
-}
-
-Method GetQuantity() As %Integer [ Private ]
-{
-    Return $CASE(
-        i%Presentation,
-            "PFL" : $P("1,3,5",",",$R(3)+1),
-            : $P("10,20,50,100",",",$R(4)+1)
-    )
-}
-
-Method GetUnit() As %String [ Private ]
-{
-
-    Return $CASE(
-        i%Presentation,
-            "TRO": "ML",
-                 : "ST"
-    )
-}
-
-Method GetPlaceOfStorage() As %String [ Private ]
-{
-
-    Set tPlaceOfStorage = "G,K,X,S,H"
-    Set tReturn = $P(tPlaceOfStorage,",",$R($L(tPlaceOfStorage,",")+1))
-    For i=1:1:3 {
-        If $D(i%PlaceOfStorage(i)) && (i%PlaceOfStorage(i) = tReturn) Kill i%PlaceOfStorage(i)
-    }
-
-    Return tReturn
-}
-
-Method GetMarketPrice()
-{
-
-    Return i%BasePrice * 1.32
-}
-
-Method CreateEAN() As %String [ Private ]
-{
-    #dim tEx as %Exception.SystemException
-    
-    Try {
-        Set tEan = $R(999999999999)
-        For i=$L(tEan)+1:1:12 {
-            Set tEan = tEan_$R(9)
-        }
-        For i=1:2:11 {
-            Set tProd(i) = $E(tEan,i)
-            Set tProd(i+1) = $E(tEan,i+1)*3 
-        }
-    
-        Set tPruef = 0
-        For i=1:1:12 {
-            Set tPruef = tPruef + tProd(i) 
-        }
-        If tPruef#10 > 0 {
-            Set tPruef = 10 - (tPruef#10)
-        }
-        Else {
-            Set tPruef = 0
-        }
-    }
-    Catch tEx {
-        Write !,tEx.DisplayString()
-        Set tPruef = 0
-    }    
-    Return tEan_tPruef
-}
-
-}
+Q2xhc3MgVHJhaW5pbmcuQXJ0aWNsZSBFeHRlbmRzICglUGVyc2lzdGVudCwgJVhNTC5BZGFwdG9y
+LCAlSlNPTi5BZGFwdG9yLCAlUG9wdWxhdGUpDQp7DQoNClByb3BlcnR5IEVBTiBBcyAlU3RyaW5n
+KE1BWExFTiA9IDEzLCBNSU5MRU4gPSAxMywgUE9QU1BFQyA9ICIuQ3JlYXRlRUFOKCkiKTsNCg0K
+UHJvcGVydHkgQXJ0aWNsZURlc2NyaXB0aW9uIEFzICVTdHJpbmcoUE9QT1JERVIgPSAzLCBQT1BT
+UEVDID0gIi5DcmVhdGVBcnRpY2xlRGVzY3JpcHRpb24oKSIpOw0KDQpQcm9wZXJ0eSBQcmVzZW50
+YXRpb24gQXMgJVN0cmluZyhNQVhMRU4gPSAzLCBQT1BPUkRFUiA9IDQsIFBPUFNQRUMgPSAiLkdl
+dFByZXNlbnRhdGlvbigpIik7DQoNClByb3BlcnR5IFF1YW50aXR5IEFzICVJbnRlZ2VyKFBPUE9S
+REVSID0gNSwgUE9QU1BFQyA9ICIuR2V0UXVhbnRpdHkoKSIpOw0KDQpQcm9wZXJ0eSBRdWFudGl0
+eVVuaXQgQXMgJVN0cmluZyhQT1BPUkRFUiA9IDYsIFBPUFNQRUMgPSAiLkdldFVuaXQoKSIpOw0K
+DQpQcm9wZXJ0eSBCYXNlUHJpY2UgQXMgJU51bWVyaWMoTUFYVkFMID0gMjAuMDAsIE1JTlZBTCA9
+IDIuMDAsIFBPUE9SREVSID0gMSk7DQoNClByb3BlcnR5IE1hcmtldFByaWNlIEFzICVOdW1lcmlj
+KFBPUE9SREVSID0gMiwgUE9QU1BFQyA9ICIuR2V0TWFya2V0UHJpY2UoKSIpOw0KDQpQcm9wZXJ0
+eSBQbGFjZU9mU3RvcmFnZSBBcyBsaXN0IE9mICVTdHJpbmcoUE9QU1BFQyA9ICIuR2V0UGxhY2VP
+ZlN0b3JhZ2UoKTozIik7DQoNCkluZGV4IGlkeEJlekRhciBPbiAoQXJ0aWNsZURlc2NyaXB0aW9u
+LCBRdWFudGl0eSkgWyBVbmlxdWUgXTsNCg0KTWV0aG9kIEFkZFJlbW92ZVBsYWNlT2ZTdG9yYWdl
+KHBQbGFjZU9mU3RvcmFnZSBBcyAlU3RyaW5nKE1BWExFTj0xKSwgcERlbGV0ZSBBcyAlQm9vbGVh
+bikgQXMgJVN0YXR1cw0Kew0KDQogICAgI2RpbSB0U2MgYXMgJVN0YXR1cyA9ICQkJE9LDQoNCiAg
+ICAgICAgVHJ5IHsNCiAgICAgICAgICAgIFNldCB0SWR4ID0gLi5QbGFjZU9mU3RvcmFnZS5GaW5k
+KHBQbGFjZU9mU3RvcmFnZSkNCiAgICAgICAgICAgIElmICdwRGVsZXRlICYmICh0SWR4PSIiKSB7
+DQogICAgICAgICAgICAgICAgJCQkVGhyb3dPbkVycm9yKC4uUGxhY2VPZlN0b3JhZ2UuSW5zZXJ0
+KHBQbGFjZU9mU3RvcmFnZSkpDQogICAgICAgICAgICB9DQogICAgICAgICAgICBFbHNlSWYgcERl
+bGV0ZSAmJiAodElkeCc9IiIpIHsNCiAgICAgICAgICAgICAgICBEbyAuLlBsYWNlT2ZTdG9yYWdl
+LlJlbW92ZUF0KHRJZHgpICAgIA0KICAgICAgICAgICAgfQ0KICAgICAgICB9DQogICAgICAgIENh
+dGNoIHRFeCB7DQogICAgICAgICAgICBXcml0ZSAhLHRFeC5EaXNwbGF5U3RyaW5nKCkNCiAgICAg
+ICAgICAgIFNldCB0U2MgPSB0RXguQXNTdGF0dXMoKSANCiAgICAgICAgfSANCg0KICAgICAgICBS
+ZXR1cm4gdFNjDQp9DQoNCk1ldGhvZCBDcmVhdGVBcnRpY2xlRGVzY3JpcHRpb24oKSBBcyAlU3Ry
+aW5nIFsgUHJpdmF0ZSBdDQp7DQoNCiAgICBTZXQgdFZhbHVlcyA9ICJBQkMtUGZsYXN0ZXIsQXNw
+aXJpbixUaG9tYXB5cmluLElidXByb3BoZW4sTXVjY29zb2x2YW4sVm9sdGFyZW4iDQogICAgU2V0
+IHRJZHggPSAkUigkTCh0VmFsdWVzLCIsIikpICsgMQ0KICAgIFJldHVybiAkUCh0VmFsdWVzLCIs
+Iix0SWR4KQ0KfQ0KDQpNZXRob2QgR2V0UHJlc2VudGF0aW9uKCkgQXMgJVN0cmluZyBbIFByaXZh
+dGUgXQ0Kew0KDQogICAgUmV0dXJuICRDQVNFKGklQXJ0aWNsZURlc2NyaXB0aW9uLA0KICAgICAg
+ICAgICAgICAgICJBQkMtUGZsYXN0ZXIiIDoiUEZMIiwNCiAgICAgICAgICAgICAgICAiTXVjY29z
+b2x2YW4iIDogIlRSTyIsDQogICAgICAgICAgICAgICAgOiAiVEFCIg0KDQogICAgKQ0KfQ0KDQpN
+ZXRob2QgR2V0UXVhbnRpdHkoKSBBcyAlSW50ZWdlciBbIFByaXZhdGUgXQ0Kew0KICAgIFJldHVy
+biAkQ0FTRSgNCiAgICAgICAgaSVQcmVzZW50YXRpb24sDQogICAgICAgICAgICAiUEZMIiA6ICRQ
+KCIxLDMsNSIsIiwiLCRSKDMpKzEpLA0KICAgICAgICAgICAgOiAkUCgiMTAsMjAsNTAsMTAwIiwi
+LCIsJFIoNCkrMSkNCiAgICApDQp9DQoNCk1ldGhvZCBHZXRVbml0KCkgQXMgJVN0cmluZyBbIFBy
+aXZhdGUgXQ0Kew0KDQogICAgUmV0dXJuICRDQVNFKA0KICAgICAgICBpJVByZXNlbnRhdGlvbiwN
+CiAgICAgICAgICAgICJUUk8iOiAiTUwiLA0KICAgICAgICAgICAgICAgICA6ICJTVCINCiAgICAp
+DQp9DQoNCk1ldGhvZCBHZXRQbGFjZU9mU3RvcmFnZSgpIEFzICVTdHJpbmcgWyBQcml2YXRlIF0N
+CnsNCg0KICAgIFNldCB0UGxhY2VPZlN0b3JhZ2UgPSAiRyxLLFgsUyxIIg0KICAgIFNldCB0UmV0
+dXJuID0gJFAodFBsYWNlT2ZTdG9yYWdlLCIsIiwkUigkTCh0UGxhY2VPZlN0b3JhZ2UsIiwiKSsx
+KSkNCiAgICBGb3IgaT0xOjE6MyB7DQogICAgICAgIElmICREKGklUGxhY2VPZlN0b3JhZ2UoaSkp
+ICYmIChpJVBsYWNlT2ZTdG9yYWdlKGkpID0gdFJldHVybikgS2lsbCBpJVBsYWNlT2ZTdG9yYWdl
+KGkpDQogICAgfQ0KDQogICAgUmV0dXJuIHRSZXR1cm4NCn0NCg0KTWV0aG9kIEdldE1hcmtldFBy
+aWNlKCkNCnsNCg0KICAgIFJldHVybiBpJUJhc2VQcmljZSAqIDEuMzINCn0NCg0KTWV0aG9kIENy
+ZWF0ZUVBTigpIEFzICVTdHJpbmcgWyBQcml2YXRlIF0NCnsNCiAgICAjZGltIHRFeCBhcyAlRXhj
+ZXB0aW9uLlN5c3RlbUV4Y2VwdGlvbg0KICAgIA0KICAgIFRyeSB7DQogICAgICAgIFNldCB0RWFu
+ID0gJFIoOTk5OTk5OTk5OTk5KQ0KICAgICAgICBGb3IgaT0kTCh0RWFuKSsxOjE6MTIgew0KICAg
+ICAgICAgICAgU2V0IHRFYW4gPSB0RWFuXyRSKDkpDQogICAgICAgIH0NCiAgICAgICAgRm9yIGk9
+MToyOjExIHsNCiAgICAgICAgICAgIFNldCB0UHJvZChpKSA9ICRFKHRFYW4saSkNCiAgICAgICAg
+ICAgIFNldCB0UHJvZChpKzEpID0gJEUodEVhbixpKzEpKjMgDQogICAgICAgIH0NCiAgICANCiAg
+ICAgICAgU2V0IHRQcnVlZiA9IDANCiAgICAgICAgRm9yIGk9MToxOjEyIHsNCiAgICAgICAgICAg
+IFNldCB0UHJ1ZWYgPSB0UHJ1ZWYgKyB0UHJvZChpKSANCiAgICAgICAgfQ0KICAgICAgICBJZiB0
+UHJ1ZWYjMTAgPiAwIHsNCiAgICAgICAgICAgIFNldCB0UHJ1ZWYgPSAxMCAtICh0UHJ1ZWYjMTAp
+DQogICAgICAgIH0NCiAgICAgICAgRWxzZSB7DQogICAgICAgICAgICBTZXQgdFBydWVmID0gMA0K
+ICAgICAgICB9DQogICAgfQ0KICAgIENhdGNoIHRFeCB7DQogICAgICAgIFdyaXRlICEsdEV4LkRp
+c3BsYXlTdHJpbmcoKQ0KICAgICAgICBTZXQgdFBydWVmID0gMA0KICAgIH0gICAgDQogICAgUmV0
+dXJuIHRFYW5fdFBydWVmDQp9DQoNCn0NCg==
