@@ -92,6 +92,16 @@ export class MarkdownContentComponent {
           language: '',
           title: name,
         });
+      } else if (lines[i].trim().startsWith('#')) {
+        let heading = lines[i].replace(/#/g, '').trim();
+        let level = lines[i].split(' ')[0].length;
+        let id = heading.toLowerCase().replace(/ /g, '-');
+        this.blocks.push({
+          type: 'heading',
+          code: heading,
+          language: id,
+          title: level,
+        });
       } else {
         let code = '';
         let inCodeBlock = false;
@@ -101,7 +111,8 @@ export class MarkdownContentComponent {
           !lines[i].startsWith('~~~') &&
           !lines[i].startsWith('![') &&
           !lines[i].startsWith('$$$[') &&
-          !lines[i].startsWith('?[')
+          !lines[i].startsWith('?[') &&
+          !lines[i].startsWith('#')
         ) {
           if (lines[i].startsWith('```')) {
             inCodeBlock = !inCodeBlock;

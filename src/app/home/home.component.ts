@@ -12,12 +12,17 @@ export class HomeComponent {
   title = 'InterSystemsWOOP';
 
   isServerOnline = false;
+  test = '';
 
   constructor(
     private router: Router,
     private chapterManager: ChaptermanagerService,
     private metaDataService: MetaDataService
-  ) {}
+  ) {
+    if (Math.random() < 0.1) {
+      this.test = 'Philipp was here';
+    }
+  }
 
   ngOnInit(): void {
     this.chapterManager.init();

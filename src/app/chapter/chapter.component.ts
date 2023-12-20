@@ -62,7 +62,11 @@ export class ChapterComponent {
         this.currentPage = pageLocalStorage;
         this.pageInput = this.currentPage + 1;
         if (heading != undefined) {
-          let headingPage = this.chapter.getPageForHeading(heading);
+          let headingPage = Chapter.getChapterPageForHeading(
+            this.chapter,
+            heading,
+            true
+          );
           if (headingPage != -1) {
             this.currentPage = headingPage;
             this.pageInput = this.currentPage + 1;

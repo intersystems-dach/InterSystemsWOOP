@@ -65,6 +65,30 @@ export class Chapter {
     }
     return -1;
   }
+
+  static getChapterPageForHeading(
+    chapter: Chapter,
+    heading: string,
+    trim = true
+  ): number {
+    if (trim) {
+      heading = heading.toLowerCase().replace(/\s/g, '-');
+    }
+    for (let i = 0; i < chapter.Pages.length; i++) {
+      let page = chapter.Pages[i];
+      for (let line of page.Content.split('\n')) {
+        if (line.startsWith('#')) {
+          if (trim) {
+            line = line.toLowerCase().replace(/\s/g, '-');
+          }
+          if (line.includes(heading)) {
+            return i;
+          }
+        }
+      }
+    }
+    return -1;
+  }
 }
 
 export class Page {

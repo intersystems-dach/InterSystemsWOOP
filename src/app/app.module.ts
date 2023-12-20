@@ -41,6 +41,7 @@ import { ServerSettingsComponent } from './settings/settings-pages/server-settin
 import { NotificationComponent } from './notification/notification.component';
 import { WoopsSettingsComponent } from './settings/settings-pages/woops-settings/woops-settings.component';
 import { CookieMessageComponent } from './cookie-message/cookie-message.component';
+import { HeadingComponent } from './heading/heading.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { CookieMessageComponent } from './cookie-message/cookie-message.componen
     NotificationComponent,
     WoopsSettingsComponent,
     CookieMessageComponent,
+    HeadingComponent,
   ],
   imports: [
     BrowserModule,

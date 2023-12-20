@@ -124,7 +124,7 @@ export class SearchBarHeaderComponent {
     if (lowerSearchValue == 'banana') {
       window.location.href = 'https://www.youtube.com/watch?v=9EcjWd-O4jI';
     }
-    if (lowerSearchValue == 'pbonin') {
+    if (lowerSearchValue == 'philipp') {
       window.location.href = 'https://philipp-bonin.com/';
     }
     if (lowerSearchValue == 'pong') {
@@ -149,7 +149,7 @@ export class SearchBarHeaderComponent {
     if (lowerSearchValue == 'lavender') {
       this.colorSchemeService.lavenderMode();
     }
-    if (this.searchValue == 'WOOPSS') {
+    if (this.searchValue == 'WOOPSS' || this.searchValue == 'PHB') {
       LocalStorageService.setWoopsActivated(true);
       NotificationComponent.showNotification('WOOPSS', '');
     }
