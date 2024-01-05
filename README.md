@@ -9,14 +9,14 @@
 
 <!-- Badges -->
 <div align="center">
-   <a href="https://github.com/phil1436/InterSystemsWOOP/blob/master/LICENSE">
-       <img src="https://img.shields.io/github/license/phil1436/InterSystemsWOOP" alt="license" />
+   <a href="https://github.com/intersystems-dach/InterSystemsWOOP/blob/master/LICENSE">
+       <img src="https://img.shields.io/github/license/intersystems-dach/InterSystemsWOOP" alt="license" />
    </a>
-   <a href="https://github.com/phil1436/InterSystemsWOOP/stargazers">
-       <img src="https://img.shields.io/github/stars/phil1436/InterSystemsWOOP" alt="stars" />
+   <a href="https://github.com/intersystems-dach/InterSystemsWOOP/stargazers">
+       <img src="https://img.shields.io/github/stars/intersystems-dach/InterSystemsWOOP" alt="stars" />
    </a>
-   <a href="https://github.com/phil1436/InterSystemsWOOP/commits/master">
-       <img src="https://img.shields.io/github/last-commit/phil1436/InterSystemsWOOP" alt="last commit" />
+   <a href="https://github.com/intersystems-dach/InterSystemsWOOP/commits/master">
+       <img src="https://img.shields.io/github/last-commit/intersystems-dach/InterSystemsWOOP" alt="last commit" />
    </a>
 </div>
 

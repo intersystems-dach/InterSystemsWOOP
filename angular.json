@@ -26,7 +26,7 @@
             "assets": ["src/assets"],
             "styles": ["src/styles.sass"],
             "scripts": [],
-            "baseHref": "/InterSystemsWOOPCli/"
+            "baseHref": "/InterSystemsWOOP/"
           },
           "configurations": {
             "production": {
