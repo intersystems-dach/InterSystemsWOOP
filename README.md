@@ -29,5 +29,3 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 by [Philipp B.](https://github.com/phil1436)
 
 _This application is not supported by InterSystems Corporation. Please be notified that you use it at your own responsibility_
-
-<!-- ng deploy --base-href=https://phil1436.github.io/InterSystemsWOOP/ -->
