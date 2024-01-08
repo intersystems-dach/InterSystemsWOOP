@@ -70,11 +70,9 @@ export class MarkdownContentComponent {
         }
         if (lines[i].startsWith('?[')) {
           let newURL = 'assets/resources/' + name;
-          if (newURL != undefined) {
-            url = newURL;
-          } else {
-            console.log('error getting image');
-          }
+          let raw = await fetch(newURL).then((res) => res.text());
+          raw = 'data:image/png;base64,' + raw;
+          url = raw;
         }
         this.blocks.push({
           type: 'image',
